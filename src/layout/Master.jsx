@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './SideBar';
+import support from '../assets/images/support.png'
 
 const Layout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -34,7 +35,7 @@ const Layout = () => {
                                 <i className="fa-solid fa-bars text-2xl"></i>
                             </button>
                             <div className="flex items-center gap-6 w-fit">
-                                <i className='bx bxs-'></i>
+                                <img src={support} alt='Support' width={30} className='' />
                                 <i className='bx bxs-bell-ring text-3xl'></i>
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2rQqSyR1xF2AJYlijHJvqb-vhe4EyWSc5ZA&s" alt="profile img"
                                 className='w-[50px] rounded-full' />
