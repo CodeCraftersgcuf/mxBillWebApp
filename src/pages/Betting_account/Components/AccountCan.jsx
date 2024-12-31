@@ -7,11 +7,11 @@ const AccountCan = () => {
     const [account, setaccount] = React.useState([
         {
             'image': Betting,
-            'link' : '#'
+            'link' : '/betting/EnterInfo'
         },
         {
             'image': betway,
-            'link' : '#'
+            'link' : '/betting/EnterInfo'
         }
     ])
     return (

@@ -12,6 +12,9 @@ import Security from './pages/Security/Security';
 import HelpCenter from './pages/helpCenter/HelpCenter';
 import Policy from './pages/policy/Policy';
 import Betting from './pages/Betting_account/Betting';
+import EnterInfo from './pages/EnterInfo/EnterInfo';
+import Nodification from './pages/nodifications/Nodification';
+import TransactionRecipt from './pages/transaction/TransactionRecipt';
 function App() {
 
   return (
@@ -27,10 +30,13 @@ function App() {
           <Route path='security' element={<Security />} />
           <Route path='help-center' element={<HelpCenter />} />
           <Route path='privacy-policy' element={<Policy />} />
+          <Route path='nodifications' element={<Nodification />} />
 
 
           {/* not in navbar  */}
           <Route path='betting-account' element={<Betting />} />
+          <Route path='betting/EnterInfo' element={<EnterInfo />} />
+          <Route path='transactions/receipt' element={<TransactionRecipt />} />
         </Route>
       </Routes>
     </Router>

@@ -6,41 +6,49 @@ const Menuitems = ({textSize,icon,circleSize,perColumn= '8'}) => {
         {
           "icon": "bxs-wallet",
           "name": "Fund Wallet",
+          'link': '/betting-account',
           'iconType' : 'bx'
         },
         {
           "icon": "bx-transfer-alt",
           "name": "Transactions",
+          'link': '/betting-account',
           'iconType' : 'bx'
         },
         {
           "icon": "bx-football",
           "name": "Betting",
+          'link': '/betting-account',
           'iconType' : 'bx'
         },
         {
           "icon": "bxs-bolt",
           "name": "Electricity",
+          'link': '/betting-account',
           'iconType' : 'bx'
         },
         {
           "icon": "bxs-tv",
           "name": "Cable TV",
+          'link': '/betting-account',
           'iconType' : 'bx'
         },
         {
           "icon": "bxs-phone-call",
           "name": "Airtime",
+          'link': '/betting-account',
           'iconType' : 'bx'
         },
         {
           "icon": "fa-solid fa-tower-broadcast",
           "name": "Data Bundle",
+          'link': '/betting-account',
           'iconType' : 'awesome'
         },
         {
           "icon": "fa-solid fa-wifi",
           "name": "Internet",
+          'link': '/betting-account',
           'iconType' : 'awesome'
         }
       ])
@@ -55,6 +63,7 @@ const Menuitems = ({textSize,icon,circleSize,perColumn= '8'}) => {
                 textSize={textSize}
                 iconSize={icon}
                 circleSize={circleSize}
+                link={item.link}
                  />
             ))
         }
