@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LinkComp from './components/sidebar/Link';
-
+import logo from '../assets/images/mxlogo.png';
 const Sidebar = ({ setMobileOpen }) => {
     const [links, setlinks] = React.useState([
         {
@@ -65,8 +65,8 @@ const Sidebar = ({ setMobileOpen }) => {
                 >✕</button>
             </div>
             {/* Sidebar content */}
-            <div className="px-4 pt-4">
-                <h1 className='text-4xl text-white font-extrabold'>Logo Name</h1>
+            <div className="px-4 pt-4 flex items-center">
+            <img src={logo} alt="Logo" className="" width={100}  /><h1 className='text-2xl text-white font-extrabold'>BILL <span className='font-normal'>PAY</span></h1>
             </div>
             {/* Menu */}
             <div className="mt-6 h-[70vh] overflow-auto px-4">
