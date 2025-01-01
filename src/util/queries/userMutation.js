@@ -1,5 +1,6 @@
 import axios from "axios";
-import { API_ENDPOINTS } from "../../apiConfig";
+import { apiCall } from '../cutomApiCall';
+import { API_ENDPOINTS } from '../../apiConfig';
 
 export const UserDetail = async (data) => {
     try {

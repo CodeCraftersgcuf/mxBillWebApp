@@ -1,22 +1,19 @@
 import React from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const LinkComp = ({ link, icon, name }) => {
-  const location = useLocation();
-  const isActive = location.pathname === link;
-
-  return (
-    <RouterLink to={link}>
-      <div
-        className={`flex items-center gap-2 p-2 text-base capitalize font-bold rounded-lg hover:bg-white hover:text-black ${
-          isActive ? 'sidebar-link-active' : ''
-        }`}
-      >
-        <i className={`bx ${icon} text-3xl`}></i>
-        {name}
-      </div>
-    </RouterLink>
-  );
+const LinkComp = ({ name, link, icon, isActive, onClick }) => {
+    return (
+        <Link
+            to={link}
+            onClick={onClick}
+            className={`flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer ${
+                isActive ? 'bg-white text-black' : 'hover:bg-gray-700'
+            }`}
+        >
+            <i className={`bx ${icon} text-2xl`}></i>
+            <span className="capitalize">{name}</span>
+        </Link>
+    );
 };
 
 export default LinkComp;

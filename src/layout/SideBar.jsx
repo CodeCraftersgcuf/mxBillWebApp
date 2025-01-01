@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; // Import useLocation for active link detection
 import LinkComp from './components/sidebar/Link';
 import logo from '../assets/images/mxlogo.png';
+
 const Sidebar = ({ setMobileOpen }) => {
-    const [links, setlinks] = React.useState([
+    const location = useLocation(); // Get the current location
+    const [activeLink, setActiveLink] = React.useState('/dashboard'); // Default active link is '/dashboard'
+
+    const links = [
         {
             "name": 'dashboard',
             "link": '/dashboard',
@@ -54,7 +58,13 @@ const Sidebar = ({ setMobileOpen }) => {
             "link": '/privacy-policy',
             "icon": 'bxs-lock'
         },
-    ])
+    ];
+
+    React.useEffect(() => {
+        // Update active link based on the current location
+        setActiveLink(location.pathname);
+    }, [location.pathname]);
+
     return (
         <div className="bg-theme-primary text-white border-r h-screen">
             {/* Close button for mobile */}
@@ -66,16 +76,24 @@ const Sidebar = ({ setMobileOpen }) => {
             </div>
             {/* Sidebar content */}
             <div className="px-4 pt-4 flex items-center">
-            <img src={logo} alt="Logo" className="" width={100}  /><h1 className='text-2xl text-white font-extrabold'>BILL <span className='font-normal'>PAY</span></h1>
+                <img src={logo} alt="Logo" className="" width={100} />
+                <h1 className='text-2xl text-white font-extrabold'>
+                    BILL <span className='font-normal'>PAY</span>
+                </h1>
             </div>
             {/* Menu */}
             <div className="mt-6 h-[70vh] overflow-auto px-4">
                 <nav className="flex flex-col gap-3">
-                    {
-                        links.map((x, index) => (
-                            <LinkComp key={index} name={x.name} link={x.link} icon={x.icon} />
-                        ))
-                    }
+                    {links.map((x, index) => (
+                        <LinkComp
+                            key={index}
+                            name={x.name}
+                            link={x.link}
+                            icon={x.icon}
+                            isActive={activeLink === x.link} // Pass isActive prop
+                            onClick={() => setActiveLink(x.link)} // Set active link on click
+                        />
+                    ))}
                 </nav>
             </div>
             <div className='p-4'>

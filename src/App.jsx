@@ -39,7 +39,7 @@ function App() {
 
     return token && user;
   };
-  console.log("isAuthenticated", isAuthenticated());
+
   const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated()) {
       toast.error(
@@ -49,11 +49,11 @@ function App() {
     }
     return children;
   };
+
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <Router>
-          {/* Toaster added here to ensure it works across all routes */}
           <Toaster position="top-right" />
           <Routes>
             {/* Public Routes */}
@@ -62,8 +62,15 @@ function App() {
             <Route path="otp-verification" element={<OtpVerification />} />
             <Route path="profileInfo" element={<GetProfileInfo />} />
 
-            {/* Routes under Master layout */}
-            <Route path="/" element={<Master />}>
+            {/* Protected Routes under Master layout */}
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Master />
+                </ProtectedRoute>
+              }
+            >
               <Route
                 path="dashboard"
                 element={
@@ -145,9 +152,9 @@ function App() {
                 }
               />
 
-              {/* Not in navbar */}
+              {/* Route for betting category */}
               <Route
-                path="betting-account"
+                path="/:categoryId"
                 element={
                   <ProtectedRoute>
                     <Betting />
@@ -155,13 +162,14 @@ function App() {
                 }
               />
               <Route
-                path="betting/EnterInfo"
+                path="/:categoryId/:providerId"
                 element={
                   <ProtectedRoute>
                     <EnterInfo />
                   </ProtectedRoute>
                 }
               />
+
               <Route
                 path="transactions/receipt"
                 element={

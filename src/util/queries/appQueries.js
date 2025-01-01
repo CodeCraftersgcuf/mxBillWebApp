@@ -1,5 +1,5 @@
-import { API_ENDPOINTS } from '@/apiConfig';
-import { apiCall } from '../customApiCall';
+import { apiCall } from '../cutomApiCall';
+import { API_ENDPOINTS } from '../../apiConfig';
 
 export const getBillerCategories = async ({ token }) => {
   return await apiCall(

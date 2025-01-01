@@ -1,16 +1,58 @@
-import React from 'react'
+import React, { useRef, useEffect } from "react";
 
-const Options = ({icon='' , heading =''}) => {
-    return (
+const Options = ({
+  type = "",
+  icon = "",
+  heading = "",
+  options = [],
+  value = "",
+  editable = true,
+  onChange = () => {},
+}) => {
+  const inputRef = useRef(null);
 
-    <div className='p-4 bg-gray-200 rounded-lg'>
-        <div className='flex items-center gap-4 text-2xl'>
-            {/* select boxicon or mouse  */}
-            {icon}
-            <h1 className='capitalize'>{heading}</h1>
-        </div>
+  console.log("options", options);
+
+  // Ensure the input reflects the value from the parent component
+  useEffect(() => {
+    if (inputRef.current && type !== "dropdown") {
+      inputRef.current.value = value;
+    }
+  }, [value]);
+
+  return (
+    <div className="p-4 bg-gray-200 rounded-lg flex items-center gap-4 text-2xl">
+      {/* Icon */}
+      {icon && <span>{icon}</span>}
+
+      {/* Render dropdown or input inside the same box */}
+      {type === "dropdown" ? (
+        <select
+          className="flex-1 p-2 border rounded-lg bg-gray-200 text-black"
+          value={value || ""}
+          onChange={(e) => onChange(e.target.value)}
+        >
+          <option value="" disabled hidden>
+            {heading || "Select an option"}
+          </option>
+          {options.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          ref={inputRef}
+          type={heading === "Amount" ? "number" : "text"} // Number type for Amount
+          placeholder={heading}
+          className="flex-1 p-2 border rounded-lg bg-gray-200 text-black"
+          readOnly={!editable} // Make non-editable if `editable` is false
+          onChange={(e) => onChange(e.target.value)}
+        />
+      )}
     </div>
-    )
-}
+  );
+};
 
-export default Options
+export default Options;

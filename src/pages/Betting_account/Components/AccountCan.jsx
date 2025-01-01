@@ -1,28 +1,23 @@
-import React from 'react'
-import Account from './Account'
-import Betting from '../../../assets/images/1xbet.jpeg'
-import betway from '../../../assets/images/betway.jpeg'
+import React from 'react';
+import Account from './Account';
+import { useNavigate } from 'react-router-dom';
 
-const AccountCan = () => {
-    const [account, setaccount] = React.useState([
-        {
-            'image': Betting,
-            'link' : '/betting/EnterInfo'
-        },
-        {
-            'image': betway,
-            'link' : '/betting/EnterInfo'
-        }
-    ])
-    return (
-        <div className='grid grid-cols-2 gap-4'>
-            {
-                account.map((item,index) => (
-                    <Account key={index} image={item.image} addressLink={item.link}/>
-                ))
-            }
+const AccountCan = ({ providers = [], categoryId }) => {
+  const navigate = useNavigate();
+
+  const handleProviderClick = (providerId) => {
+    navigate(`/${categoryId}/${providerId}`);
+  };
+
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {providers.map((provider, index) => (
+        <div key={index} onClick={() => handleProviderClick(provider.id)}>
+          <Account image={provider.logo} />
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export default AccountCan
+export default AccountCan;
