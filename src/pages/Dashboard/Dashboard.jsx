@@ -5,10 +5,6 @@ import Recet from "./components/Recet/Recet";
 import BalanceWrapper from "../../components/BalanceWrapper";
 
 const Dashboard = () => {
-
-
-
-
   return (
     <BalanceWrapper>
       {({ balanceDisplayData }) => (

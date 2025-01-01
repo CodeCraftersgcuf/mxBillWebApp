@@ -1,15 +1,17 @@
-import React from 'react';
+
+// ReceiptModel Component
+import React from "react";
 
 const ReceiptModel = ({
   show = false,
   onClose = () => {},
-  amountPaid = 'N/A',
-  billerCategory = 'N/A',
-  billerProvider = 'N/A',
-  billerItem = 'N/A',
-  transactionDate = 'N/A',
-  transactionId = 'N/A',
-  status = 'N/A',
+  amountPaid = "N/A",
+  billerCategory = "N/A",
+  billerProvider = "N/A",
+  billerItem = "N/A",
+  transactionDate = "N/A",
+  transactionId = "N/A",
+  status = "N/A",
 }) => {
   if (!show) return null;
 
@@ -47,7 +49,9 @@ const ReceiptModel = ({
           </div>
           <div className="flex justify-between items-center">
             <span className="font-bold">Status</span>
-            <span className={`font-bold ${status === 'Completed' ? 'bg-green-500 text-white' : 'bg-gray-500'} p-2 rounded`}>{status}</span>
+            <span className={`font-bold ${status === "Completed" ? "bg-green-500 text-white" : "bg-gray-500"} p-2 rounded`}>
+              {status}
+            </span>
           </div>
         </div>
 
