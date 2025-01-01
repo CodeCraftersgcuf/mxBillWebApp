@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom'; // Import useLocation for active link detection
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Added useNavigate for redirection
 import LinkComp from './components/sidebar/Link';
 import logo from '../assets/images/mxlogo.png';
+import Cookies from 'js-cookie'; // Import Cookies for clearing authentication
 
 const Sidebar = ({ setMobileOpen }) => {
     const location = useLocation(); // Get the current location
+    const navigate = useNavigate(); // For redirecting after logout
     const [activeLink, setActiveLink] = React.useState('/dashboard'); // Default active link is '/dashboard'
 
     const links = [
@@ -65,6 +67,21 @@ const Sidebar = ({ setMobileOpen }) => {
         setActiveLink(location.pathname);
     }, [location.pathname]);
 
+    const handleLogout = () => {
+        // Clear all authentication data
+        Cookies.remove('authToken');
+        Cookies.remove('userId');
+        Cookies.remove('email');
+        Cookies.remove('profilePicture');
+        Cookies.remove('firstName');
+        Cookies.remove('lastName');
+        Cookies.remove('accountBalance');
+        Cookies.remove('accountNumber');
+
+        // Redirect to home
+        navigate('/login');
+    };
+
     return (
         <div className="bg-theme-primary text-white border-r h-screen">
             {/* Close button for mobile */}
@@ -97,7 +114,10 @@ const Sidebar = ({ setMobileOpen }) => {
                 </nav>
             </div>
             <div className='p-4'>
-                <button className='bg-white flex items-center justify-start py-2 px-2 gap-2 text-black font-bold rounded-lg w-full'>
+                <button
+                    onClick={handleLogout} // Attach logout handler
+                    className='bg-white flex items-center justify-start py-2 px-2 gap-2 text-black font-bold rounded-lg w-full'
+                >
                     <i className='bx bx-log-in-circle text-4xl text-red-700'></i> Logout
                 </button>
             </div>

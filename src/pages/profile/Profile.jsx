@@ -1,132 +1,121 @@
-import React from 'react';
-import visaCard from '../../assets/images/visa.jpeg';
-import flag from '../../assets/images/flag.png';
+import React, { useState, useEffect, useContext } from "react";
+import ProfileImage from "../../components/ProfileImage";
+import Form from "../../components/Form";
+import { AuthContext } from "../../context/AuthContext";
+import { updateProfile } from "../../util/mutations/accountMutations";
+import { useMutation } from "@tanstack/react-query";
+import Cookies from "js-cookie";
+import { Toaster, toast } from "react-hot-toast";
+import visaCard from "../../assets/images/visa.jpeg";
 
 const Profile = () => {
+    const {
+        firstName: contextFirstName,
+        lastName: contextLastName,
+        email: contextEmail,
+        profilePicture: contextProfilePicture,
+        login,
+    } = useContext(AuthContext);
+
+    const [profileImage, setProfileImage] = useState(visaCard);
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        gender: "",
+    });
+
+    const token = Cookies.get("authToken");
+
+    console.log("token", token);
+    useEffect(() => {
+        // Fallback to cookies if AuthContext is not initialized
+        const storedFirstName = contextFirstName || Cookies.get("firstName");
+        const storedLastName = contextLastName || Cookies.get("lastName");
+        const storedEmail = contextEmail || Cookies.get("email");
+        const storedProfilePicture = contextProfilePicture || Cookies.get("profilePicture");
+
+        console.log("Inside the UseEffect");
+        console.log(storedFirstName, storedLastName, storedEmail, storedProfilePicture);
+
+        // Update state only if there are changes
+        setProfileImage(storedProfilePicture || visaCard);
+        setFormData((prevData) => ({
+            ...prevData,
+            firstName: storedFirstName || "",
+            lastName: storedLastName || "",
+            email: storedEmail || "",
+        }));
+    }, [contextFirstName, contextLastName, contextEmail, contextProfilePicture]);
+    const { mutate: updateProfileMutation, isLoading } = useMutation({
+        mutationFn: ({ data }) => updateProfile({ data, token }),
+        onSuccess: (data) => {
+            toast.dismiss();
+            toast.success("Profile updated successfully!");
+    
+            // Update AuthContext with the updated profile data
+            const updatedProfile = data?.profile;
+            login({
+                firstName: updatedProfile?.firstName,
+                lastName: updatedProfile?.lastName,
+                email: updatedProfile?.email,
+                profilePicture: updatedProfile?.profilePicture,
+                // Include any other fields returned in the profile
+                phone: updatedProfile?.phone,
+                gender: updatedProfile?.gender,
+            });
+        },
+        onError: (error) => {
+            toast.dismiss();
+            toast.error(`Error updating profile: ${error.message}`);
+        },
+    });
+    
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFormData((prevData) => ({ ...prevData, profilePicture: file }));
+            const reader = new FileReader();
+            reader.onload = () => {
+                setProfileImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Submitting form...");
+        const updatedData = new FormData();
+        Object.keys(formData).forEach((key) => {
+            if (formData[key]) {
+                updatedData.append(key, formData[key]);
+            }
+        });
+        console.log("Inside the handleSubmit", formData);
+        // Call the mutate function here
+        updateProfileMutation({ data: updatedData, token });
+    };
+    console.log("The Form Data", formData);
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100 md:py-[100px]">
+            <Toaster />
             <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-                {/* Profile Image */}
-                <div className="absolute top-[-50px] left-1/2 -translate-x-1/2 mx-auto w-fit">
-                    <img
-                        src={visaCard}
-                        alt="Profile"
-                        className="rounded-full w-24 h-24 object-cover"
-                    />
-                    <button className="absolute bottom-0 right-0 bg-black text-white rounded-full p-4 flex items-center justify-center">
-                        <i className="bx bxs-pencil p-0 m-0"></i>
-                    </button>
-                </div>
-
-                {/* Form Fields */}
-                <form className="mt-6 space-y-4">
-                    {/* First Name */}
-                    <div className="relative z-[1]">
-                        <label className="block text-sm font-semibold text-gray-700">
-                            First Name
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Peter"
-                            className="block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 bg-transparent focus:ring-indigo-500"
-                        />
-                        <button
-                            type="button"
-                            className="absolute right-3 top-1/2 z-[-1] text-gray-400"
-                        >
-                            <i className="bx bxs-pencil"></i>
-                        </button>
-                    </div>
-
-                    {/* Last Name */}
-                    <div className="relative z-[1]">
-                        <label className="block text-sm font-semibold text-gray-700">
-                            Last Name
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Odoh"
-                            className="block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 bg-transparent focus:ring-indigo-500"
-                        />
-                        <button
-                            type="button"
-                            className="absolute right-3 top-1/2 z-[-1] text-gray-400"
-                        >
-                            <i className="bx bxs-pencil"></i>
-                        </button>
-                    </div>
-
-                    {/* Email Address */}
-                    <div className="relative z-[1]">
-                        <label className="block text-sm font-semibold text-gray-700">
-                            Email Address
-                        </label>
-                        <input
-                            type="email"
-                            placeholder="odohpeteamuta@gmail.com"
-                            className="block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 bg-transparent focus:ring-indigo-500"
-                        />
-                        <button
-                            type="button"
-                            className="absolute right-3 top-1/2  text-gray-400 flex items-center justify-center"
-                        >
-                            <i className="bx bxs-pencil"></i>
-                        </button>
-                    </div>
-
-                    {/* Phone Number */}
-                    <div className="relative z-[1]">
-                        <label className="block text-sm font-semibold text-gray-700">
-                            Phone Number
-                        </label>
-                        <div className="flex items-center">
-                            <div className='flex items-center justify-center gap-2 bg-gray-100 px-4 py-2 border rounded-l-lg'>
-                                <img src={flag} alt="nigeria" className='w-6' />
-                                <span className="inline-block">+234</span>
-                            </div>
-                            <input
-                                type="tel"
-                                placeholder="9112096734"
-                                className="block w-full px-4 py-2 border rounded-r-lg shadow-sm focus:outline-none focus:ring-2 bg-transparent focus:ring-indigo-500"
-                            />
-                        </div>
-                        <button
-                            type="button"
-                            className="absolute right-3 top-1/2 z-[-1] text-gray-400"
-                        >
-                            <i className="bx bxs-pencil"></i>
-                        </button>
-                    </div>
-
-                    {/* Gender */}
-                    <div className="relative z-[1]">
-                        <label className="block text-sm font-semibold text-gray-700">
-                            Gender
-                        </label>
-                        <select
-                            className="block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 bg-transparent focus:ring-indigo-500"
-                        >
-                            <option value="" disabled selected>
-                                Select
-                            </option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                        <button
-                            type="button"
-                            className="absolute right-3 top-1/2 z-[-1] text-gray-400"
-                        >
-                            <i className="bx bxs-pencil"></i>
-                        </button>
-                    </div>
-                    {/* Update Button */}
-                    <button
-                        type="submit"
-                        className="w-full bg-theme-primary text-white py-2 px-4 rounded-lg shadow-lg hover:bg-[#4416af] font-semibold"
-                    >
-                        Update
-                    </button>
-                </form>
+                <ProfileImage profileImage={profileImage} handleImageChange={handleImageChange} />
+                <Form
+                    formData={formData}
+                    handleInputChange={handleInputChange}
+                    handleSubmit={handleSubmit}
+                    isLoading={isLoading}
+                    disableEmail
+                />
             </div>
         </div>
     );

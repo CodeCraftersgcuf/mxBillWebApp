@@ -1,4 +1,6 @@
-import React from "react";
+
+// Updated LoginPage.js
+import React, { useContext } from "react";
 import Input from "../../components/Input";
 import logo from "../../assets/images/mxlogo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,27 +11,29 @@ import { loginSchema } from "../../util/validationSchemas";
 import PrimaryBtn from "../../components/PrimaryBtn";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../../util/mutations/authMutations";
-import Cookies from "js-cookie"; // Import js-cookie
-import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext); // Access the login method from AuthContext
 
-  // LoginPage.js
   const { mutate: loginMutation, isPending } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log("Login success response:", data);
-      console.log("User ID:",data.user.userId);
 
-      // Store data in cookies using AuthContext
+      // Store data in AuthContext
       login({
         user: data.user,
         token: data.token,
         email: data.user.email,
+        firstName: data.user.firstName,
+        lastName: data.user.lastName,
+        profilePicture: data.user.profilePicture,
+        accountBalance: data.user.accountBalance,
+        accountNumber: data.user.accountNumber,
+        totalIncome: data.user.totalIncome,
+        totalBillPayment: data.user.totalBillPayment,
       });
 
       toast.success("Login successful!");
@@ -55,8 +59,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center   mt-16">
-      <div className=" rounded-lg p-8 bg-grayscale100 w-[30%]">
+    <div className="flex flex-col items-center justify-center mt-16">
+      <div className="rounded-lg p-8 bg-grayscale100 w-[30%]">
         <div className="flex justify-center mb-4">
           <img src={logo} alt="logo" className="" width={100} />
         </div>
@@ -70,7 +74,10 @@ const LoginPage = () => {
         >
           {({ values, errors, touched, handleBlur, handleChange }) => (
             <Form>
-              {["email", "password"].map((field) => (
+              {[
+                "email",
+                "password",
+              ].map((field) => (
                 <Input
                   key={field}
                   id={field}
@@ -91,18 +98,6 @@ const LoginPage = () => {
                   onChange={handleChange}
                   checked={values.rememberMe}
                 />
-                {/* <button
-                  className="text-blue-700 cursor-pointer"
-                  onClick={() =>
-                    navigate("/forgot-password", {
-                      state: {
-                        email: values.email,
-                      },
-                    })
-                  }
-                >
-                  Forgot the password?
-                </button> */}
               </div>
               <PrimaryBtn type="submit" disabled={isPending}>
                 {isPending ? "Logging In..." : "Login"}
