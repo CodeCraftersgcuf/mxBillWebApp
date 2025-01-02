@@ -6,7 +6,7 @@ import Overlay from '../../layout/components/sidebar/Overlay'
 
 const VirtualCard = () => {
     return (
-        <div className='relative'>
+        <div className='relative min-h-screen'>
             <Overlay />
             <div className='p-4'>
                 <Header Subheading='current Balance' amount={'0.00'} />

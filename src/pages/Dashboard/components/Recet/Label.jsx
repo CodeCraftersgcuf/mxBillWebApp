@@ -12,7 +12,7 @@ const Label = ({heading = 'N/A',subheading = 'N/A',amount = 'N/A',date = 'N/A'})
                 <h1 className='font-bold text-xl'>₦ {amount}</h1>
             </div>
             <div className='flex items-center justify-between'>
-                <h1 className=' capitalize'>{subheading}</h1>
+                <h1 className=' capitalize pr-2 text-xs md:text-base'>{subheading}</h1>
                 <h1 className=''>{date}</h1>
             </div>
         </div>

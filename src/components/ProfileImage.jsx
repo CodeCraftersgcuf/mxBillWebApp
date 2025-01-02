@@ -7,7 +7,7 @@ const ProfileImage = ({ profileImage, handleImageChange }) => (
             alt="Profile"
             className="rounded-full w-24 h-24 object-cover"
         />
-        <label className="absolute bottom-0 right-0 bg-black text-white rounded-full p-2 cursor-pointer">
+        <label className="absolute bottom-0 right-0 bg-black text-white flex items-center justify-center rounded-full p-2 cursor-pointer">
             <i className="bx bxs-pencil"></i>
             <input
                 type="file"

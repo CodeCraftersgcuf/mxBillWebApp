@@ -20,7 +20,7 @@ const MakePayment = ({
 
   return (
     <div
-      className="modal absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 z-50 flex items-end justify-center"
+      className="modal absolute top-0 left-0 w-full min-h-full bg-gray-900 bg-opacity-50 z-50 flex items-end justify-center"
       onClick={handleOutsideClick}
     >
       <div className="main bg-white w-full md:w-[60%] p-4 rounded-t-lg flex flex-col gap-4">
