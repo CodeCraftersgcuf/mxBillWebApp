@@ -24,6 +24,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import GetProfileInfo from "./pages/auth/GetProfileInfo";
 import OtpVerification from "./pages/auth/OtpVerification";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import { Toaster, toast } from "react-hot-toast";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -39,11 +40,10 @@ function App() {
     const user = Cookies.get("userId");
     const firstName = Cookies.get("firstName");
     const lastName = Cookies.get("lastName");
-  
+
     // Ensure token, user, firstName, and lastName are all present
     return token && user && firstName && lastName;
   };
-  
 
   const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated()) {
@@ -200,6 +200,9 @@ function App() {
                 }
               />
             </Route>
+
+            {/* 404 Not Found Route */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
       </QueryClientProvider>

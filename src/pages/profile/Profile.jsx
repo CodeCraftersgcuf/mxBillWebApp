@@ -74,15 +74,12 @@ const Profile = () => {
                 profilePicture: fullProfilePictureURL,
                 phone: updatedProfile?.phone,
                 gender: updatedProfile?.gender,
-                accountBalance: updatedProfile?.accountBalance,
             });
     
-            // Update cookies (exclude email as it is not editable)
             Cookies.set("firstName", updatedProfile?.firstName || "", { secure: true, sameSite: "strict" });
             Cookies.set("lastName", updatedProfile?.lastName || "", { secure: true, sameSite: "strict" });
             Cookies.set("profilePicture", fullProfilePictureURL || "", { secure: true, sameSite: "strict" });
             Cookies.set("phoneNumber", updatedProfile?.phone || "", { secure: true, sameSite: "strict" });
-            Cookies.set("accountBalance", updatedProfile?.accountBalance || "", { secure: true, sameSite: "strict" });
     
             // Update state
             setProfileImage(fullProfilePictureURL || visaCard);

@@ -51,11 +51,11 @@ export const AuthProvider = ({ children }) => {
     if (currentToken) {
       Cookies.set("authToken", currentToken, { secure: true, sameSite: "strict" });
     }
-
-    if (accountBalance !== undefined && accountBalance !== null) {
+    if (accountBalance) {
       Cookies.set("accountBalance", accountBalance, { secure: true, sameSite: "strict" });
     }
-
+    const currentAccountBalance = accountBalance || state.accountBalance; // Preserve the current account balance from state
+    
     Cookies.set("userId", user?.userId || Cookies.get("userId"), { secure: true, sameSite: "strict" });
     Cookies.set("email", email || Cookies.get("email"), { secure: true, sameSite: "strict" });
     Cookies.set("profilePicture", profilePicture || Cookies.get("profilePicture"), { secure: true, sameSite: "strict" });
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
         firstName,
         lastName,
         profilePicture,
-        accountBalance,
+        accountBalance : currentAccountBalance,
         accountNumber,
         totalIncome,
         totalBillPayment,
