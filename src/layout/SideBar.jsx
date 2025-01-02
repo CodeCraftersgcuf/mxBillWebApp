@@ -42,7 +42,7 @@ const Sidebar = ({ setMobileOpen }) => {
         },
         {
             "name": 'Nodifications',
-            "link": '/nodifications',
+            "link": '/notifications',
             "icon": 'bxs-bell-ring'
         },
         {
@@ -93,13 +93,13 @@ const Sidebar = ({ setMobileOpen }) => {
             </div>
             {/* Sidebar content */}
             <div className="px-4 pt-4 flex items-center">
-                <img src={logo} alt="Logo" className="" width={100} />
-                <h1 className='text-2xl text-white font-extrabold'>
+                <img src={logo} alt="Logo" className="w-[50px] md:w-[100px]" />
+                <h1 className='text-xl md:text-2xl text-white font-extrabold'>
                     BILL <span className='font-normal'>PAY</span>
                 </h1>
             </div>
             {/* Menu */}
-            <div className="mt-6 h-[70vh] overflow-auto px-4">
+            <div className="h-fit  lg:h-[400px] overflow-auto px-4 pt-4 ">
                 <nav className="flex flex-col gap-3">
                     {links.map((x, index) => (
                         <LinkComp

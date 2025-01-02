@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Sidebar from "./SideBar";
 import support from "../assets/images/support.png";
 import { AuthContext } from "../context/AuthContext";
@@ -30,47 +30,44 @@ const Layout = () => {
   }
 
   return (
-    <>
-      <div className="flex mx-auto">
-        {/* Sidebar */}
-        <div
-          className={`container fixed lg:static top-0 left-0 z-20 bg-white transition-transform transform ${
-            mobileOpen ? "translate-x-0" : "-translate-x-full"
-          } lg:translate-x-0 lg:w-[20%] w-64`}
-        >
-          <Sidebar setMobileOpen={setMobileOpen} />
-        </div>
-        {/* Main Content */}
-        <div
-          className={`container flex-1 h-screen overflow-auto bg-gray-100 transition-all duration-300`}
-        >
-          <div className="sticky z-[99999] top-0 bg-theme-primary text-white flex justify-between items-center p-4 m-0">
-            <button
-              className="block lg:hidden"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              <i className="bx bx-menu text-4xl"></i>
-            </button>
-            <button
-              className="hidden lg:block opacity-0 cursor-default"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-            >
-              <i className="fa-solid fa-bars text-2xl"></i>
-            </button>
-            <div className="flex items-center gap-6 w-fit">
-              <img src={support} alt="Support" width={30} className="" />
-              <i className="bx bxs-bell-ring text-3xl"></i>
+    <div className="flex h-screen overflow-hidden bg-gray-100">
+      {/* Sidebar */}
+      <div
+        className={`fixed lg:static top-0 left-0 z-[60] bg-white transition-transform transform ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0  lg:w-[20%] w-64 h-full`}
+      >
+        <Sidebar setMobileOpen={setMobileOpen} />
+      </div>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <div className="sticky z-[99999] top-0 bg-theme-primary text-white flex justify-between items-center p-4">
+          <div className="opacity-0 lg:block hidden"></div>
+          <button
+            className="block lg:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            <i className="bx bx-menu text-4xl"></i>
+          </button>
+          <div className="flex items-center gap-6">
+            <Link to={'/help-center'}><img src={support} alt="Support" width={30} /></Link>
+            <Link to={'notifications/settings'}><i className="bx bxs-bell-ring text-3xl"></i></Link>
+            <Link to={'/profile'}>
               <img
                 src={currentProfilePicture}
                 alt="Profile"
-                className="w-[50px] rounded-full"
+                className="w-[50px] h-[50px] rounded-full border-2 border-white"
               />
-            </div>
+            </Link>
           </div>
+        </div>
+        {/* Main Content */}
+        <div className="flex-1 overflow-auto">
           <Outlet />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
