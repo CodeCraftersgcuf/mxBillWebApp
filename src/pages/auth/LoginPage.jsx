@@ -21,25 +21,35 @@ const LoginPage = () => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log("Login success response:", data);
-
+  
+      const { user, token } = data;
+      const { firstName, lastName, email, profilePicture, accountBalance, accountNumber, totalIncome, totalBillPayment, phone } = user;
+  
       // Store data in AuthContext
       login({
-        user: data.user,
-        token: data.token,
-        email: data.user.email,
-        firstName: data.user.firstName,
-        lastName: data.user.lastName,
-        profilePicture: data.user.profilePicture,
-        accountBalance: data.user.accountBalance,
-        accountNumber: data.user.accountNumber,
-        totalIncome: data.user.totalIncome,
-        totalBillPayment: data.user.totalBillPayment,
+        user,
+        token,
+        email,
+        firstName,
+        lastName,
+        profilePicture,
+        accountBalance,
+        accountNumber,
+        totalIncome,
+        totalBillPayment,
+        phoneNumber: phone,
       });
-
+  
       toast.success("Login successful!");
-
-      // Redirect to dashboard after login
-      navigate("/dashboard");
+  
+      // Check if firstName or lastName is undefined
+      if (!firstName || !lastName) {
+        // Redirect to Profile Page to complete information
+        navigate("/profileInfo");
+      } else {
+        // Redirect to dashboard after login
+        navigate("/dashboard");
+      }
     },
     onError: (error) => {
       console.log(error);
@@ -48,7 +58,7 @@ const LoginPage = () => {
       );
     },
   });
-
+  
   const handleSubmit = (data) => {
     console.log(data);
     const { email, password } = data;

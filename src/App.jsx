@@ -36,9 +36,13 @@ function App() {
   const isAuthenticated = () => {
     const token = Cookies.get("authToken"); // Retrieve token from cookies
     const user = Cookies.get("userId");
-
-    return token && user;
+    const firstName = Cookies.get("firstName");
+    const lastName = Cookies.get("lastName");
+  
+    // Ensure token, user, firstName, and lastName are all present
+    return token && user && firstName && lastName;
   };
+  
 
   const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated()) {
@@ -54,7 +58,15 @@ function App() {
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <Router>
-          <Toaster position="top-right" />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                zIndex: 20, // Ensures toast is above other elements
+                marginTop: "100px", // Adds a margin of 100px from the top
+              },
+            }}
+          />
           <Routes>
             {/* Public Routes */}
             <Route path="login" element={<LoginPage />} />

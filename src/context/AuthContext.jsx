@@ -1,4 +1,3 @@
-// Updated AuthContext.js
 import { createContext, useReducer } from "react";
 import Cookies from "js-cookie";
 
@@ -6,15 +5,16 @@ export const AuthContext = createContext();
 
 const initialState = {
   user: null,
-  token: null,
+  token: Cookies.get("authToken") || null,
   email: null,
   firstName: null,
   lastName: null,
   profilePicture: null,
-  accountBalance: null,
+  accountBalance: Cookies.get("accountBalance") || null, // Read from cookies
   accountNumber: null,
   totalIncome: null,
   totalBillPayment: null,
+  phoneNumber: null,
 };
 
 export const authReducer = (state, action) => {
@@ -22,7 +22,7 @@ export const authReducer = (state, action) => {
     case "LOGIN":
       return { ...state, ...action.payload };
     case "LOGOUT":
-      return { ...initialState }; // Reset to initial state on logout
+      return { ...initialState, token: null }; // Reset to initial state on logout
     default:
       return state;
   }
@@ -31,7 +31,6 @@ export const authReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Save token and email to cookies for better security
   const login = (data) => {
     const {
       user,
@@ -44,22 +43,32 @@ export const AuthProvider = ({ children }) => {
       accountNumber,
       totalIncome,
       totalBillPayment,
+      phoneNumber,
     } = data;
 
-    Cookies.set("authToken", token, { secure: true, sameSite: "strict" });
-    Cookies.set("userId", user.userId, { secure: true, sameSite: "strict" });
-    Cookies.set("email", email, { secure: true, sameSite: "strict" });
-    Cookies.set("profilePicture", profilePicture, { secure: true, sameSite: "strict" });
-    Cookies.set("firstName", firstName, { secure: true, sameSite: "strict" });
-    Cookies.set("lastName", lastName, { secure: true, sameSite: "strict" });
-    Cookies.set("accountBalance", accountBalance, { secure: true, sameSite: "strict" });
-    Cookies.set("accountNumber", accountNumber, { secure: true, sameSite: "strict" });
+    const currentToken = token || state.token; // Preserve the current token if not provided
+
+    if (currentToken) {
+      Cookies.set("authToken", currentToken, { secure: true, sameSite: "strict" });
+    }
+
+    if (accountBalance !== undefined && accountBalance !== null) {
+      Cookies.set("accountBalance", accountBalance, { secure: true, sameSite: "strict" });
+    }
+
+    Cookies.set("userId", user?.userId || Cookies.get("userId"), { secure: true, sameSite: "strict" });
+    Cookies.set("email", email || Cookies.get("email"), { secure: true, sameSite: "strict" });
+    Cookies.set("profilePicture", profilePicture || Cookies.get("profilePicture"), { secure: true, sameSite: "strict" });
+    Cookies.set("firstName", firstName || Cookies.get("firstName"), { secure: true, sameSite: "strict" });
+    Cookies.set("lastName", lastName || Cookies.get("lastName"), { secure: true, sameSite: "strict" });
+    Cookies.set("accountNumber", accountNumber || Cookies.get("accountNumber"), { secure: true, sameSite: "strict" });
+    Cookies.set("phoneNumber", phoneNumber || Cookies.get("phoneNumber"), { secure: true, sameSite: "strict" });
 
     dispatch({
       type: "LOGIN",
       payload: {
         user,
-        token,
+        token: currentToken,
         email,
         firstName,
         lastName,
@@ -68,6 +77,7 @@ export const AuthProvider = ({ children }) => {
         accountNumber,
         totalIncome,
         totalBillPayment,
+        phoneNumber,
       },
     });
   };
@@ -81,6 +91,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("lastName");
     Cookies.remove("accountBalance");
     Cookies.remove("accountNumber");
+    Cookies.remove("phoneNumber");
     dispatch({ type: "LOGOUT" });
   };
 
