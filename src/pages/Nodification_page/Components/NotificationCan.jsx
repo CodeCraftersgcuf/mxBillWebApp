@@ -1,7 +1,7 @@
 import React from 'react'
 import profileDemo from '../../../assets/images/user.png'
 
-const NotificationCan = ({ title = 'N/A', date = 'N/A',time='N/A', paragraph = 'N/A', profile = profileDemo ,status = false }) => {
+const NotificationCan = ({ title = 'N/A', date = 'N/A',time='N/A', paragraph = 'N/A', profile = profileDemo }) => {
     return (
         <div className='p-2 md:p-6 bg-gray-300 rounded-lg my-4'>
             <div className='flex justify-between items-center'>
@@ -15,7 +15,7 @@ const NotificationCan = ({ title = 'N/A', date = 'N/A',time='N/A', paragraph = '
                     </div>
                 </div>
                 <div>
-                    <div className='bg-theme-primary p-2 px-4 text-sm rounded text-white'>{ status ? 'New' : 'Readed' }</div>
+                    <div className='bg-theme-primary p-2 px-4 text-sm rounded text-white'>New</div>
                 </div>
             </div>
             <p className='py-4'>

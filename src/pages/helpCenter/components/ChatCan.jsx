@@ -6,7 +6,6 @@ const ChatCan = ({ messages }) => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to the bottom when messages change
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
@@ -34,7 +33,6 @@ const ChatCan = ({ messages }) => {
             );
           }
         })}
-        {/* Dummy div to scroll into view */}
         <div ref={messagesEndRef} />
       </div>
     </div>

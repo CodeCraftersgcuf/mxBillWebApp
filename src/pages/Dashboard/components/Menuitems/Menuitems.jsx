@@ -25,8 +25,12 @@ const MenuItems = ({ textSize, icon, circleSize, perColumn = '8' }) => {
     if (category.isCategory === 1) {
       // Pass categoryId and icon to the Betting page
       navigate(`/${category.id}`, { state: { icon: category.icon } });
-    } else {
-      console.warn('This category is not navigable:', category);
+    }
+    if(category.name ==='Deposit'){
+      navigate('/fund/wallet');
+    }
+    if(category.name === 'History'){
+      navigate('/transactions');
     }
   };
 

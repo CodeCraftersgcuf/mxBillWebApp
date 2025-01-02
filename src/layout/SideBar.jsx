@@ -83,7 +83,7 @@ const Sidebar = ({ setMobileOpen }) => {
     };
 
     return (
-        <div className="bg-theme-primary text-white border-r h-screen">
+        <div className="bg-theme-primary text-white border-r overflow-auto h-screen">
             {/* Close button for mobile */}
             <div className="flex justify-end lg:hidden mb-4">
                 <button
@@ -99,7 +99,7 @@ const Sidebar = ({ setMobileOpen }) => {
                 </h1>
             </div>
             {/* Menu */}
-            <div className="h-fit  lg:h-[400px] overflow-auto px-4 pt-4 ">
+            <div className="overflow-auto px-4 pt-4 ">
                 <nav className="flex flex-col gap-3">
                     {links.map((x, index) => (
                         <LinkComp

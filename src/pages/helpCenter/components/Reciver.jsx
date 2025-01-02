@@ -5,7 +5,7 @@ const Reciver = ({ text, time, isImage }) => {
     <div className="flex justify-start">
       <div
         className="bg-theme-primary text-white p-2 rounded-lg max-w-[75%] md:max-w-[40%]"
-        style={{ wordWrap: 'break-word' }} // Ensure long text wraps
+        style={{ wordWrap: 'break-word' }}
       >
         {isImage ? (
           <img src={text} alt="Received" className="rounded-lg w-full" />
