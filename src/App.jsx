@@ -26,6 +26,8 @@ import GetProfileInfo from "./pages/auth/GetProfileInfo";
 import OtpVerification from "./pages/auth/OtpVerification";
 import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import { Toaster, toast } from "react-hot-toast";
+import UserEmail from "./pages/auth/UserEmail";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 import { AuthProvider } from "./context/AuthContext";
 import Cookies from "js-cookie";
@@ -74,7 +76,8 @@ function App() {
             <Route path="signup" element={<SignupPage />} />
             <Route path="otp-verification" element={<OtpVerification />} />
             <Route path="profileInfo" element={<GetProfileInfo />} />
-
+            <Route path='reset' element={<UserEmail />} />
+            <Route path="resetpassword" element={<ResetPassword />} />
             {/* Protected Routes under Master layout */}
             <Route
               path="/"

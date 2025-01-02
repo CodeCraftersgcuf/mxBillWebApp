@@ -108,6 +108,18 @@ const LoginPage = () => {
                   onChange={handleChange}
                   checked={values.rememberMe}
                 />
+                  <button
+                  className="text-blue-700 cursor-pointer"
+                  onClick={() =>
+                    navigate("/reset", {
+                      state: {
+                        email: values.email,
+                      },
+                    })
+                  }
+                >
+                  Forgot the password?
+                </button>
               </div>
               <PrimaryBtn type="submit" disabled={isPending}>
                 {isPending ? "Logging In..." : "Login"}

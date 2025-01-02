@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PrimaryBtn from "../../components/PrimaryBtn";
 import { AuthContext } from "../../context/AuthContext";
 import Cookies from "js-cookie";
+import { verifyPasswordOtp } from "../../util/mutations/authMutations";
 
 function OtpVerification({ numberOfDigits = 4, isOtp, onSuccess }) {
   const [otp, setOtp] = useState(new Array(numberOfDigits).fill(""));
@@ -32,13 +33,42 @@ function OtpVerification({ numberOfDigits = 4, isOtp, onSuccess }) {
     },
   });
 
+  const userId = localStorage.getItem("userIdForPasswordReset");
+  const otpCode = localStorage.getItem("otpCode");
+  const { mutate: verifyOtpPasswordMutation, isPending: isPasswordOtpPending } =
+    useMutation({
+      mutationFn: ({ otpValue }) => {
+        if (!userId) {
+          throw new Error("User ID is missing. Please retry the process.");
+        }
+        if (otpCode == otpValue) {
+          console.log("The values correctly matches");
+          return verifyPasswordOtp({ otp: otpValue, user_id: userId });
+        }
+      },
+      onSuccess: (data) => {
+        toast.success(data.message || "OTP verified successfully!");
+        // localStorage.removeItem("userIdForPasswordReset");
+        localStorage.removeItem("otpCode");
+        console.log("Password reset OTP verified. Data:", data);
+        navigate("/resetpassword");
+      },
+      onError: (error) => {
+        console.error("Verification Error:", error);
+        toast.error(
+          error?.response?.data?.message ||
+            "OTP verification failed. Please try again."
+        );
+      },
+    });
+
   const { mutate: resendOtpMutation, isLoading: isResending } = useMutation({
     mutationFn: () => {
       const headers = {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       };
-  
+
       // Ensure the `email` is sent in the correct format
       return resendOtp({
         data: { email }, // Email in the body
@@ -54,7 +84,6 @@ function OtpVerification({ numberOfDigits = 4, isOtp, onSuccess }) {
       toast.error(error?.response?.data?.message || "Failed to resend OTP.");
     },
   });
-  
 
   const handleChange = (value, index) => {
     const newArr = [...otp];
@@ -65,17 +94,22 @@ function OtpVerification({ numberOfDigits = 4, isOtp, onSuccess }) {
       otpBoxReference.current[index + 1].focus();
     }
   };
-
   const handleOtpSubmit = () => {
     const otpValue = otp.join("");
-    if (otpValue.length === numberOfDigits) {
-      verifyOtpMutation({ otpValue });
-    } else {
+
+    // Ensure OTP length matches the required number of digits
+    if (otpValue.length !== numberOfDigits) {
       toast.error("Please enter a valid OTP.");
+      return;
     }
 
-    if (otp) {
-      onSuccess();
+    // Check if userId exists for password reset
+    const check = localStorage.getItem("userIdForPasswordReset");
+    if (check) {
+      console.log("User ID exists for password reset:", check);
+      verifyOtpPasswordMutation({ otpValue });
+    } else {
+      verifyOtpMutation({ otpValue });
     }
   };
 
@@ -122,18 +156,20 @@ function OtpVerification({ numberOfDigits = 4, isOtp, onSuccess }) {
         ))}
       </div>
 
-      <p className="mt-3 font-urbanist-regular">
-        {resendTimer > 0 ? (
-          <span className="text-black">{`Resend OTP in ${resendTimer} s`}</span>
-        ) : (
-          <span
-            className="text-primary underline hover:cursor-pointer hover:opacity-70 active:opacity-70 disabled:opacity-50"
-            onClick={handleResendOtp}
-          >
-            {isResending ? "Resending..." : "Resend OTP"}
-          </span>
-        )}
-      </p>
+      {!otpCode && (
+        <p className="mt-3 font-urbanist-regular">
+          {resendTimer > 0 ? (
+            <span className="text-black">{`Resend OTP in ${resendTimer} s`}</span>
+          ) : (
+            <span
+              className="text-primary underline hover:cursor-pointer hover:opacity-70 active:opacity-70 disabled:opacity-50"
+              onClick={handleResendOtp}
+            >
+              {isResending ? "Resending..." : "Resend OTP"}
+            </span>
+          )}
+        </p>
+      )}
       <div className="max-w-4xl">
         {" "}
         <PrimaryBtn onClick={handleOtpSubmit} disabled={isPending}>

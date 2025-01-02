@@ -31,7 +31,7 @@ const Security = () => {
     },
     onError: (error) => {
       toast.dismiss();
-      toast.error( "Failed to update password");
+      toast.error( "Wrong old password. Failed to update password");
     },
   });
 
