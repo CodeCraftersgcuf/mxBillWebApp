@@ -29,7 +29,7 @@ const Input = ({ id, label, error, icon, type, ...props }) => {
               <input
                 id={id}
                 type={type}
-                className="flex-1 focus:ring-0 bg-transparent text-black py-4 px-1 outline-none rounded-md"
+                className={`flex-1 ${icon ? '' : 'pl-4'} focus:ring-0 bg-transparent text-black py-4 px-1 outline-none rounded-md`}
                 {...props}
                 required
               />

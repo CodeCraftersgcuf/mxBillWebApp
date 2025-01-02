@@ -29,6 +29,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
 import Cookies from "js-cookie";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import NodificationPage from "./pages/Nodification_page/NodificationPage";
 
 const queryClient = new QueryClient();
 
@@ -156,7 +157,15 @@ function App() {
                 }
               />
               <Route
-                path="nodifications"
+                path="notifications"
+                element={
+                  <ProtectedRoute>
+                    <NodificationPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="notifications/settings"
                 element={
                   <ProtectedRoute>
                     <Nodification />

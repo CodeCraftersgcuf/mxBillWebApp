@@ -9,7 +9,7 @@ const Bill_payment = () => {
       {({ balanceDisplayData }) => (
         <div className="p-4 text-4xl">
           <Balance balanceData={balanceDisplayData} />
-          <Menuitems textSize={"lg"} icon={"2xl"} circleSize={"20"} perColumn="4" />
+          <Menuitems />
         </div>
       )}
     </BalanceWrapper>

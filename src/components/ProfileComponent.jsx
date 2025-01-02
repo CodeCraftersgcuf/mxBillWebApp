@@ -35,10 +35,10 @@ const ProfileComponent = ({ initialImage, onImageChange, editIcon }) => {
         />
         <button
           onClick={handleImageUpload}
-          className="absolute bottom-0 right-0 bg-gray-900 p-2 rounded-full border-2 bg-blue-500 border-white"
+          className="absolute bottom-0 right-0 bg-gray-900 p-2 rounded-full border-2  border-white"
           aria-label="Edit Profile Image"
         >
-          <img src={editIcon} alt="Edit" className="w-5 h-5" />
+          <img src={editIcon} alt="Edit" className="invert w-5 h-5" />
         </button>
       </span>
       <input
