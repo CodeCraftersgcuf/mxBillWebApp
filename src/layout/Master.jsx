@@ -42,7 +42,7 @@ const Layout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="sticky z-[99999] top-0 bg-theme-primary text-white flex justify-between items-center p-4">
+        <div className="sticky z-[99999] top-0 bg-theme-primary text-white flex justify-between items-center p-4 pe-20 sm:pe-0">
           <div className="opacity-0 lg:block hidden"></div>
           <button
             className="block lg:hidden"

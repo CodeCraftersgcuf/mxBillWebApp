@@ -8,6 +8,7 @@ import { useParams, useLocation } from 'react-router-dom';
 const Betting = () => {
   const { categoryId } = useParams(); // Get the categoryId from the route
   const { state } = useLocation(); // Retrieve the icon from the state
+  console.log("This is the State: ", state);  
   const token = Cookies.get('authToken');
 
   const { data: billerProviders, isLoading, isError } = useQuery({
@@ -26,10 +27,10 @@ const Betting = () => {
   const Title = billerProviders?.data?.[0]?.providerTitle || 'Loading...';
 
   return (
-    <div className="p-4">
+    <div className="p-4 ">
       <div className="mx-w-[100%] md:max-w-[70%] mx-auto">
         <div className="bg-theme-primary text-white rounded-lg shadow-lg p-8 w-full flex flex-col items-center justify-center">
-          <div className='bg-white p-4 rounded-full'>
+          <div className=' p-4 rounded-full'>
           {/* Use the icon passed from the MenuItems */}
           <img
             src={state?.icon || 'https://via.placeholder.com/150'}

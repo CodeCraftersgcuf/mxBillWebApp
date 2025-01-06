@@ -27,7 +27,7 @@ const MenuItems = ({ textSize, icon, circleSize, perColumn = "8" }) => {
 
   const handleCategoryClick = (category) => {
     if (category.isCategory === 1) {
-      // Pass categoryId and icon to the Betting page
+      console.log("Navigating with state:", { icon: category.icon });
       navigate(`/${category.id}`, { state: { icon: category.icon } });
     }
     if (category.name === "Deposit") {
@@ -49,7 +49,7 @@ const MenuItems = ({ textSize, icon, circleSize, perColumn = "8" }) => {
 
   return (
     <div
-      className={` w-[95%] -translate-y-6 mx-auto bg-white shadow-lg rounded p-4 grid grid-cols-8 md:grid-cols-${perColumn} gap-2`}
+      className={`w-[95%] -translate-y-6 mx-auto bg-white shadow-lg rounded p-4 grid grid-cols-2 sm:grid-cols-4   lg:grid-cols-8 gap-2`}
     >
       {itemsFromAPI.map((item, index) => (
         <div key={index} onClick={() => handleCategoryClick(item)}>

@@ -154,7 +154,13 @@ const EnterInfo = () => {
     return parseFloat(charges) + parseFloat(perccetangeValue);
   };
   return (
-    <div className="p-4 relative">
+    <div className="p-4 relative md:max-w-[100%] mx-0 md:mx-auto"
+    style={{
+      minHeight: "calc(100vh - 64px)",
+      maxWidth: "90%", // This will be applied for small screens between 325px and 420px
+    }}
+  
+    >
       {loaderLoading && <Loader />}
       {isLoading && (
         <div className="text-center text-lg font-bold">
@@ -189,7 +195,7 @@ const EnterInfo = () => {
             message={errorMessage}
             fundLink={"#"}
           />
-          <div className={`mx-w-[100%] md:max-w-[70%] mx-auto my-4`}>
+          <div className={``}>
             <h1 className="text-center capitalize font-bold text-2xl">
               Top up your {billerItems?.data?.provider?.title || "account"}
             </h1>
