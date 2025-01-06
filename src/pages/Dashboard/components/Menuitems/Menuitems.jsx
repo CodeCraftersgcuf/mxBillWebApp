@@ -49,7 +49,7 @@ const MenuItems = ({ textSize, icon, circleSize, perColumn = "8" }) => {
 
   return (
     <div
-      className={`w-[95%] -translate-y-6 mx-auto bg-white shadow-lg rounded p-4 grid grid-cols-2 sm:grid-cols-4   lg:grid-cols-8 gap-2`}
+      className={`w-[95%] -translate-y-6 mx-auto bg-white shadow-lg rounded p-4 grid grid-cols-2 md:grid-cols-6 sm:grid-cols-4   lg:grid-cols-8 gap-2`}
     >
       {itemsFromAPI.map((item, index) => (
         <div key={index} onClick={() => handleCategoryClick(item)}>
