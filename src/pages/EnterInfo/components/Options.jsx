@@ -46,7 +46,7 @@ const Options = ({
           ref={inputRef}
           type={heading === "Amount" ? "number" : "text"} // Number type for Amount
           placeholder={heading}
-          className="flex-1 p-2 border rounded-lg bg-gray-200 text-black"
+          className="flex-1 p-2 border rounded-lg bg-gray-200 text-black text-sm md:text-lg"
           readOnly={!editable} // Make non-editable if `editable` is false
           onChange={(e) => onChange(e.target.value)}
         />
