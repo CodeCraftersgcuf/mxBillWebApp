@@ -11,7 +11,7 @@ const Options = ({
 }) => {
   const inputRef = useRef(null);
 
-  console.log("options", options);
+  // console.log("options", options);
 
   // Ensure the input reflects the value from the parent component
   useEffect(() => {

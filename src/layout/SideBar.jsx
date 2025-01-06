@@ -41,7 +41,7 @@ const Sidebar = ({ setMobileOpen }) => {
             "icon": 'bx-user-circle'
         },
         {
-            "name": 'Nodifications',
+            "name": 'Notifications',
             "link": '/notifications',
             "icon": 'bxs-bell-ring'
         },

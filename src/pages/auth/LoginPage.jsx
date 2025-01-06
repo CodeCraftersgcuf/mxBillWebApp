@@ -1,4 +1,3 @@
-
 // Updated LoginPage.js
 import React, { useContext } from "react";
 import Input from "../../components/Input";
@@ -21,12 +20,23 @@ const LoginPage = () => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log("Login success response:", data);
-  
+
       const { user, token } = data;
-      const { firstName, lastName, email, profilePicture, accountBalance, accountNumber, totalIncome, totalBillPayment, phone } = user;
-  
-      // Store data in AuthContext
+      const {
+        firstName,
+        lastName,
+        email,
+        profilePicture,
+        accountBalance,
+        accountNumber,
+        totalIncome,
+        totalBillPayment,
+        phone,
+        id,
+      } = user;
+
       login({
+        id,
         user,
         token,
         email,
@@ -39,9 +49,9 @@ const LoginPage = () => {
         totalBillPayment,
         phoneNumber: phone,
       });
-  
+
       toast.success("Login successful!");
-  
+
       // Check if firstName or lastName is undefined
       if (!firstName || !lastName) {
         // Redirect to Profile Page to complete information
@@ -58,7 +68,7 @@ const LoginPage = () => {
       );
     },
   });
-  
+
   const handleSubmit = (data) => {
     console.log(data);
     const { email, password } = data;
@@ -84,10 +94,7 @@ const LoginPage = () => {
         >
           {({ values, errors, touched, handleBlur, handleChange }) => (
             <Form>
-              {[
-                "email",
-                "password",
-              ].map((field) => (
+              {["email", "password"].map((field) => (
                 <Input
                   key={field}
                   id={field}
@@ -108,7 +115,7 @@ const LoginPage = () => {
                   onChange={handleChange}
                   checked={values.rememberMe}
                 />
-                  <button
+                <button
                   className="text-blue-700 cursor-pointer"
                   onClick={() =>
                     navigate("/reset", {

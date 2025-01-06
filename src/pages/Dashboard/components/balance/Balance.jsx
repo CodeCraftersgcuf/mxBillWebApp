@@ -1,4 +1,4 @@
-import React from 'react';
+
 import SubBalance from './SubBalance';
 
 const Balance = ({ balanceData = [] }) => {

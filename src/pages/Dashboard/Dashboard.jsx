@@ -7,7 +7,9 @@ import BalanceWrapper from "../../components/BalanceWrapper";
 const Dashboard = () => {
   return (
     <BalanceWrapper>
+
       {({ balanceDisplayData }) => (
+        
         <section className="p-4">
           <div className="">
             <Balance balanceData={balanceDisplayData} />

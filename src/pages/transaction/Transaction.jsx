@@ -80,7 +80,9 @@ const Transaction = () => {
                   ).toLocaleString()
                 : "loading..."
             }
-            transactionId={transactionDetails?.data?.transactionId || "loading..."}
+            transactionId={
+              transactionDetails?.data?.transactionId || "loading..."
+            }
             status={transactionDetails?.data?.status || "loading..."}
             token={transactionDetails?.data?.token || "N/A"}
           />

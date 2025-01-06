@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 export const AuthContext = createContext();
 
 const initialState = {
+  id: null,
   user: null,
   token: Cookies.get("authToken") || null,
   email: null,
@@ -34,6 +35,7 @@ export const AuthProvider = ({ children }) => {
   const login = (data) => {
     const {
       user,
+      id,
       token,
       email,
       firstName,
@@ -49,20 +51,49 @@ export const AuthProvider = ({ children }) => {
     const currentToken = token || state.token; // Preserve the current token if not provided
 
     if (currentToken) {
-      Cookies.set("authToken", currentToken, { secure: true, sameSite: "strict" });
+      Cookies.set("authToken", currentToken, {
+        secure: true,
+        sameSite: "strict",
+      });
     }
     if (accountBalance) {
-      Cookies.set("accountBalance", accountBalance, { secure: true, sameSite: "strict" });
+      Cookies.set("accountBalance", accountBalance, {
+        secure: true,
+        sameSite: "strict",
+      });
     }
-    const currentAccountBalance = accountBalance || state.accountBalance; // Preserve the current account balance from state
-    
-    Cookies.set("userId", user?.userId || Cookies.get("userId"), { secure: true, sameSite: "strict" });
-    Cookies.set("email", email || Cookies.get("email"), { secure: true, sameSite: "strict" });
-    Cookies.set("profilePicture", profilePicture || Cookies.get("profilePicture"), { secure: true, sameSite: "strict" });
-    Cookies.set("firstName", firstName || Cookies.get("firstName"), { secure: true, sameSite: "strict" });
-    Cookies.set("lastName", lastName || Cookies.get("lastName"), { secure: true, sameSite: "strict" });
-    Cookies.set("accountNumber", accountNumber || Cookies.get("accountNumber"), { secure: true, sameSite: "strict" });
-    Cookies.set("phoneNumber", phoneNumber || Cookies.get("phoneNumber"), { secure: true, sameSite: "strict" });
+    const currentAccountBalance = accountBalance || state.accountBalance;
+
+    Cookies.set("userId", user?.userId || Cookies.get("userId"), {
+      secure: true,
+      sameSite: "strict",
+    });
+    Cookies.set("email", email || Cookies.get("email"), {
+      secure: true,
+      sameSite: "strict",
+    });
+    Cookies.set(
+      "profilePicture",
+      profilePicture || Cookies.get("profilePicture"),
+      { secure: true, sameSite: "strict" }
+    );
+    Cookies.set("firstName", firstName || Cookies.get("firstName"), {
+      secure: true,
+      sameSite: "strict",
+    });
+    Cookies.set("lastName", lastName || Cookies.get("lastName"), {
+      secure: true,
+      sameSite: "strict",
+    });
+    Cookies.set(
+      "accountNumber",
+      accountNumber || Cookies.get("accountNumber"),
+      { secure: true, sameSite: "strict" }
+    );
+    Cookies.set("phoneNumber", phoneNumber || Cookies.get("phoneNumber"), {
+      secure: true,
+      sameSite: "strict",
+    });
 
     dispatch({
       type: "LOGIN",
@@ -73,7 +104,7 @@ export const AuthProvider = ({ children }) => {
         firstName,
         lastName,
         profilePicture,
-        accountBalance : currentAccountBalance,
+        accountBalance: currentAccountBalance,
         accountNumber,
         totalIncome,
         totalBillPayment,

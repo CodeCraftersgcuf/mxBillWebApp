@@ -13,6 +13,7 @@ const BalanceWrapper = ({ children }) => {
     queryKey: ["balance"],
     queryFn: () => getBalance(token),
     enabled: !!token,
+    refetchInterval: 5000,
   });
 
   if (!token) {

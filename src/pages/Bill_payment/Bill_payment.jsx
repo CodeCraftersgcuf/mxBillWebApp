@@ -1,4 +1,3 @@
-import React from "react";
 import Balance from "../Dashboard/components/balance/Balance";
 import Menuitems from "../Dashboard/components/Menuitems/Menuitems";
 import BalanceWrapper from "../../components/BalanceWrapper";
@@ -9,7 +8,7 @@ const Bill_payment = () => {
       {({ balanceDisplayData }) => (
         <div className="p-4 text-4xl">
           <Balance balanceData={balanceDisplayData} />
-          <Menuitems />
+          <Menuitems  />
         </div>
       )}
     </BalanceWrapper>
