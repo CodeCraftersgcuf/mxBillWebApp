@@ -80,7 +80,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center mt-16">
-      <div className="rounded-lg p-8 bg-grayscale100 w-[30%]">
+      <div className="rounded-lg p-8 bg-grayscale100">
         <div className="flex justify-center mb-4">
           <img src={logo} alt="logo" className="" width={100} />
         </div>

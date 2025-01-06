@@ -72,7 +72,7 @@ const GetProfileInfo = ({ edit }) => {
 
   return (
     <div className="flex flex-col items-center justify-center mt-16">
-      <div className=" rounded-lg p-8 bg-grayscale100 w-[30%]">
+      <div className=" rounded-lg p-8 bg-grayscale100">
         <ProfileComponent
           initialImage={icons.userDefault3}
           editIcon={icons.edit3}
