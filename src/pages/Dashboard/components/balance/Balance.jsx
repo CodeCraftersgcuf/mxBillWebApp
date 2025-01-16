@@ -23,7 +23,7 @@ const Balance = ({ balanceData = [] }) => {
           marginBottom: "-10px",
         }}
       >
-        <div className="bg-theme-primary text-white rounded-none md:rounded-lg shadow-lg shadow-gray-600 py-8 px-9 md:px-8 md:py-16 flex flex-col gap-2">
+        <div className="bg-theme-primary text-white rounded-none md:rounded-lg shadow-lg shadow-gray-600 pb-8 px-9 md:px-8 md:py-16 flex flex-col gap-2">
           <div>
             <SubBalance
               amount={balanceData[1].amount}

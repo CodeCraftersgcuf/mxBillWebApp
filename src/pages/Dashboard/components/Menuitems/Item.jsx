@@ -26,7 +26,7 @@ const Item = ({
             <i className={`${icon} text-white text-lg sm:text-xl lg:text-2xl`}></i>
           )}
         </div>
-        <p className={`capitalize text-xs sm:text-sm lg:text-base text-center font-bold`}>
+        <p className={`capitalize text-xs sm:text-sm lg:text-base text-center `}>
           {title}
         </p>
       </div>
