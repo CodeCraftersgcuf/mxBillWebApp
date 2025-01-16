@@ -30,7 +30,7 @@ const FundWallet = () => {
   const { accountNumber, expiryDate } = accountData.data;
   console.log("accountNumber", accountNumber);
   return (
-    <div className="p-4">
+    <div className="p-0 md:p-4">
       {/* Header Component */}
       <Header
         heading="Fund wallet"
