@@ -31,11 +31,11 @@ const BalanceWrapper = ({ children }) => {
       amount: balanceData?.totalBillPayment ?? 0,
     },
     {
-      title: "Total Balance",
+      title: "Current Balance",
       amount: balanceData?.balance ?? 0,
     },
     {
-      title: "Total Income",
+      title: "Total Wallet Deposit",
       amount: balanceData?.totalIncome ?? 0,
     },
   ];

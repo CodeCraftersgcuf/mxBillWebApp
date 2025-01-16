@@ -211,7 +211,7 @@ const EnterInfo = () => {
             <h1 className="text-center capitalize font-bold text-2xl">
               Top up your {billerItems?.data?.provider?.title || "account"}
             </h1>
-            <p className="text-center my-4 md:w-[80%] text-lg mx-auto">
+            <p className="text-center my-4 md:w-[80%] text-sm md:text-lg mx-auto">
               {billerItems?.data?.provider?.description ||
                 "Quickly top up your account and keep the fun going! Enjoy seamless deposits anytime, anywhere."}
             </p>
