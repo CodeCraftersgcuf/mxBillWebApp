@@ -33,6 +33,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Cookies from "js-cookie";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NodificationPage from "./pages/Nodification_page/NodificationPage";
+import GlobalLoader from "./components/GlobalLoader";
 
 const queryClient = new QueryClient();
 
@@ -70,143 +71,145 @@ function App() {
               },
             }}
           />
-          <Routes>
-            {/* Public Routes */}
-            <Route path="login" element={<LoginPage />} />
-            <Route path="signup" element={<SignupPage />} />
-            <Route path="otp-verification" element={<OtpVerification />} />
-            <Route path="profileInfo" element={<GetProfileInfo />} />
-            <Route path='reset' element={<UserEmail />} />
-            <Route path="resetpassword" element={<ResetPassword />} />
-            {/* Protected Routes under Master layout */}
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Master />
-                </ProtectedRoute>
-              }
-            >
+          <GlobalLoader>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="login" element={<LoginPage />} />
+              <Route path="signup" element={<SignupPage />} />
+              <Route path="otp-verification" element={<OtpVerification />} />
+              <Route path="profileInfo" element={<GetProfileInfo />} />
+              <Route path="reset" element={<UserEmail />} />
+              <Route path="resetpassword" element={<ResetPassword />} />
+              {/* Protected Routes under Master layout */}
               <Route
-                path="dashboard"
+                path="/"
                 element={
                   <ProtectedRoute>
-                    <Dashboard />
+                    <Master />
                   </ProtectedRoute>
                 }
-              />
-              <Route
-                path="transactions"
-                element={
-                  <ProtectedRoute>
-                    <Transaction />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="bill/payment"
-                element={
-                  <ProtectedRoute>
-                    <Bill_payment />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="fund/wallet"
-                element={
-                  <ProtectedRoute>
-                    <FundWallet />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="virtual/card"
-                element={
-                  <ProtectedRoute>
-                    <VirtualCard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="security"
-                element={
-                  <ProtectedRoute>
-                    <Security />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="help-center"
-                element={
-                  <ProtectedRoute>
-                    <HelpCenter />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="privacy-policy"
-                element={
-                  <ProtectedRoute>
-                    <Policy />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="notifications"
-                element={
-                  <ProtectedRoute>
-                    <NodificationPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="notifications/settings"
-                element={
-                  <ProtectedRoute>
-                    <Nodification />
-                  </ProtectedRoute>
-                }
-              />
+              >
+                <Route
+                  path="dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="transactions"
+                  element={
+                    <ProtectedRoute>
+                      <Transaction />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="bill/payment"
+                  element={
+                    <ProtectedRoute>
+                      <Bill_payment />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="fund/wallet"
+                  element={
+                    <ProtectedRoute>
+                      <FundWallet />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="virtual/card"
+                  element={
+                    <ProtectedRoute>
+                      <VirtualCard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="profile"
+                  element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="security"
+                  element={
+                    <ProtectedRoute>
+                      <Security />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="help-center"
+                  element={
+                    <ProtectedRoute>
+                      <HelpCenter />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="privacy-policy"
+                  element={
+                    <ProtectedRoute>
+                      <Policy />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="notifications"
+                  element={
+                    <ProtectedRoute>
+                      <NodificationPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="notifications/settings"
+                  element={
+                    <ProtectedRoute>
+                      <Nodification />
+                    </ProtectedRoute>
+                  }
+                />
 
-              {/* Route for betting category */}
-              <Route
-                path="/:categoryId"
-                element={
-                  <ProtectedRoute>
-                    <Betting />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/:categoryId/:providerId"
-                element={
-                  <ProtectedRoute>
-                    <EnterInfo />
-                  </ProtectedRoute>
-                }
-              />
+                {/* Route for betting category */}
+                <Route
+                  path="/:categoryId"
+                  element={
+                    <ProtectedRoute>
+                      <Betting />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/:categoryId/:providerId"
+                  element={
+                    <ProtectedRoute>
+                      <EnterInfo />
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="transactions/receipt"
-                element={
-                  <ProtectedRoute>
-                    <TransactionRecipt />
-                  </ProtectedRoute>
-                }
-              />
-            </Route>
+                <Route
+                  path="transactions/receipt"
+                  element={
+                    <ProtectedRoute>
+                      <TransactionRecipt />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
 
-            {/* 404 Not Found Route */}
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+              {/* 404 Not Found Route */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </GlobalLoader>
         </Router>
       </QueryClientProvider>
     </AuthProvider>

@@ -141,6 +141,10 @@ const EnterInfo = () => {
             ? phoneNumber
             : customerId,
         id: selectedItem.id.toString(),
+        paymentItem: selectedItem.paymentCode,
+        divisionId: selectedItem.divisionId,
+        category_id: selectedItem.category_id.toString(),
+        billerId: selectedItem.billerId,
       },
       token,
     });
@@ -154,12 +158,14 @@ const EnterInfo = () => {
     return parseFloat(charges) + parseFloat(perccetangeValue);
   };
   return (
-    <div className="p-4 relative md:max-w-[100%] mx-0 md:mx-auto"
-    style={{
-      minHeight: "calc(100vh - 64px)",
-      maxWidth: "90%", // This will be applied for small screens between 325px and 420px
-    }}
+    <div
+      className="p-4 relative md:max-w-[100%] mx-0 md:mx-auto"
+      style={{
+        minHeight: "calc(100vh - 64px)",
+        maxWidth: "100%", // This will be applied for small screens between 325px and 420px
   
+
+      }}
     >
       {loaderLoading && <Loader />}
       {isLoading && (
@@ -187,6 +193,12 @@ const EnterInfo = () => {
             total={calculateTotal()}
             Balance={balanceData?.balance}
             onClose={() => setPaymentModel(false)}
+            category_id={selectedItem?.category_id}
+            divisionId={selectedItem?.divisionId}
+            paymentCode={selectedItem?.paymentCode}
+            paymentitemname={selectedItem?.paymentitemname}
+            // phoneNumber={}
+            productId={selectedItem?.productId}
           />
           <LowBalance
             show={showLowBalance}

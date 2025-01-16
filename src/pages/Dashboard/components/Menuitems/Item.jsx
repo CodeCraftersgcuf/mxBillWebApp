@@ -12,21 +12,21 @@ const Item = ({
 }) => {
   return (
     <Link to={link}>
-      <div className="mt-9 flex flex-col items-center justify-center gap-4 ">
+      <div className="mt-6 flex flex-col items-center justify-center gap-2">
         <div
-          className={` w-[100px] h-[100px]  p-12 flex items-center justify-center rounded-full bg-[#130534] p-4`}
+          className={`w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28 flex items-center justify-center rounded-full bg-[#130534]`}
         >
           {iconType === "image" ? (
             <img
               src={icon}
               alt={title}
-              className={`lg:w-[60px] w-[60px]  md:max-w-32 md:max-h-max-w-32 object-contain  `}
+              className={`w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain`}
             />
           ) : (
-            <i className={`${icon} text-white text-xl md:text-${iconSize}`}></i>
+            <i className={`${icon} text-white text-lg sm:text-xl lg:text-2xl`}></i>
           )}
         </div>
-        <p className={`capitalize text-${textSize} text-center font-bold mt-2`}>
+        <p className={`capitalize text-xs sm:text-sm lg:text-base text-center font-bold`}>
           {title}
         </p>
       </div>

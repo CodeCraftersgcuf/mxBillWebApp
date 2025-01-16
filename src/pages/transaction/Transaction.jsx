@@ -111,7 +111,7 @@ const Transaction = () => {
                     <Label
                       heading={transaction.item || "N/A"}
                       subheading={transaction.category || "N/A"}
-                      amount={`₦${transaction.amount.toFixed(2)}`}
+                      amount={`${transaction?.amount}`}
                       date={
                         new Date(transaction.date).toLocaleDateString() || "N/A"
                       }

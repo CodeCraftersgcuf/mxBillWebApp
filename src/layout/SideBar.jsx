@@ -9,6 +9,7 @@ const Sidebar = ({ setMobileOpen }) => {
     const navigate = useNavigate(); // For redirecting after logout
     const [activeLink, setActiveLink] = React.useState('/dashboard'); // Default active link is '/dashboard'
 
+    // const handleSetAct
     const links = [
         {
             "name": 'dashboard',
@@ -108,7 +109,10 @@ const Sidebar = ({ setMobileOpen }) => {
                             link={x.link}
                             icon={x.icon}
                             isActive={activeLink === x.link} // Pass isActive prop
-                            onClick={() => setActiveLink(x.link)} // Set active link on click
+                            onClick={() => {
+                                setMobileOpen(false);
+                                setActiveLink(x.link)
+                            }} // Set active link on click
                         />
                     ))}
                 </nav>

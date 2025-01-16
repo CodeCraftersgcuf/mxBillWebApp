@@ -23,11 +23,8 @@ const MenuItems = ({ textSize, icon, circleSize, perColumn = "8" }) => {
     console.error("Error fetching biller categories:", isError);
   }
 
-  console.log("billerCategories", billerCategories);
-
   const handleCategoryClick = (category) => {
     if (category.isCategory === 1) {
-      console.log("Navigating with state:", { icon: category.icon });
       navigate(`/${category.id}`, { state: { icon: category.icon } });
     }
     if (category.name === "Deposit") {
@@ -41,15 +38,15 @@ const MenuItems = ({ textSize, icon, circleSize, perColumn = "8" }) => {
   const itemsFromAPI =
     billerCategories?.data?.map((category) => ({
       id: category.id,
-      icon: category.icon || "https://via.placeholder.com/150", // Use API icon, fallback to placeholder if missing
-      name: category.categoryTitle || category.category, // Use categoryTitle if available
-      iconType: "image", // Indicate that these are image-based icons
-      isCategory: category.isCategory, // Include isCategory for navigation check
+      icon: category.icon || "https://via.placeholder.com/150",
+      name: category.categoryTitle || category.category,
+      iconType: "image",
+      isCategory: category.isCategory,
     })) || [];
 
   return (
     <div
-      className={`w-[95%] -translate-y-6 mx-auto bg-white shadow-lg rounded p-4 grid grid-cols-2 md:grid-cols-6 sm:grid-cols-4   lg:grid-cols-8 gap-2`}
+      className={`w-[95%] -translate-y-6 mx-auto bg-white shadow-lg rounded p-4 grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4`}
     >
       {itemsFromAPI.map((item, index) => (
         <div key={index} onClick={() => handleCategoryClick(item)}>

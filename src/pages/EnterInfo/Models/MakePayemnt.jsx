@@ -19,6 +19,11 @@ const MakePayment = ({
   ChargeApplied = "N/A",
   total = "N/A",
   Balance = "N/A",
+  divisionId,
+  category_id,
+  productId,
+  paymentCode,
+  paymentitemname,
   onClose = () => {},
   setSho = () => {},
 }) => {
@@ -75,6 +80,11 @@ const MakePayment = ({
       billerId: billerItemId,
       billerItemId: billerId,
       phoneNumber: phoneNumber,
+      division: divisionId,
+      category_id:category_id,
+      productId:productId,
+      paymentCode:paymentCode,
+      paymentitemname: paymentitemname,
       userId,
     };
     payBill({

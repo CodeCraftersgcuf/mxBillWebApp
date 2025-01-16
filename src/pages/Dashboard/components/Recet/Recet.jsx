@@ -11,45 +11,44 @@ const Recet = () => {
   const [showReceipt, setShowReceipt] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
   const token = Cookies.get("authToken");
-  const { data: transactionDetails, isLoading: isLoadingDetails } = useQuery({
+
+  const { data: transactionDetails } = useQuery({
     queryKey: ["transactionDetails", selectedTransactionId],
     queryFn: () => getTrsansactionDetails({ id: selectedTransactionId, token }),
     enabled: !!token && !!selectedTransactionId,
   });
 
   const handleTransactionClick = (transaction) => {
-    setSelectedTransactionId(transaction.transaction_id); // Pass the correct ID to fetch details
+    setSelectedTransactionId(transaction.transaction_id);
     setShowReceipt(true);
   };
-  // Fetch transfer history
-  const {
-    data: transferHistory,
-    isLoading: isLoadingTransferHistory,
-    isError: isErrorTransferHistory,
-  } = useQuery({
+
+  const { data: transferHistory, isLoading, isError } = useQuery({
     queryKey: ["transferHistory"],
     queryFn: () => getTransferHistory(token),
     enabled: !!token,
   });
 
-  console.log("transferHistory", transferHistory);
-
   return (
-    <div className="p-4">
+    <div className="p-3 sm:p-4 bg-gray-100 rounded-lg shadow-md">
+      {/* Header */}
       <div className="flex items-center justify-between gap-2">
-        <h1 className="font-bold text-2xl">Recent Transactions</h1>
+        <h1 className="font-bold text-lg sm:text-xl">Recent Transactions</h1>
         <Link to="/transactions">
-          <h6 className="text-lg font-bold text-theme-primary hover:underline">
+          <h6 className="text-sm sm:text-base font-bold text-theme-primary hover:underline">
             See all
           </h6>
         </Link>
       </div>
 
-      <div className="flex flex-col gap-4 py-4">
-        {isLoadingTransferHistory ? (
-          <p className="text-center text-gray-500">Loading transactions...</p>
-        ) : isErrorTransferHistory || !transferHistory?.data?.length ? (
-          <p className="text-center text-gray-500">
+      {/* Transaction List */}
+      <div className="flex flex-col gap-3 py-3 sm:gap-4 sm:py-4">
+        {isLoading ? (
+          <p className="text-center text-sm sm:text-base text-gray-500">
+            Loading transactions...
+          </p>
+        ) : isError || !transferHistory?.data?.length ? (
+          <p className="text-center text-sm sm:text-base text-gray-500">
             No recent transactions available.
           </p>
         ) : (
@@ -59,16 +58,19 @@ const Recet = () => {
               onClick={() => handleTransactionClick(transaction)}
             >
               <Label
-                key={transaction.transaction_id}
                 heading={transaction.item || "N/A"}
                 subheading={transaction.category || "N/A"}
                 amount={transaction.amount || "0"}
-                date={new Date(transaction.date).toLocaleDateString() || "N/A"}
+                date={
+                  new Date(transaction.date).toLocaleDateString() || "N/A"
+                }
               />
             </div>
           ))
         )}
       </div>
+
+      {/* Receipt Modal */}
       <ReceiptModel
         show={showReceipt}
         onClose={() => setShowReceipt(false)}

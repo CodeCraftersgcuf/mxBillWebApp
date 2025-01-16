@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Options from "./Options";
-import { useQuery } from "@tanstack/react-query";
-import { getBillerItemDetails } from "../../../util/queries/appQueries";
-import Cookies from "js-cookie";
 
 const Selection = ({
   billerItems,
@@ -14,38 +11,22 @@ const Selection = ({
   phoneNumber,
   category,
 }) => {
-  const token = Cookies.get("authToken");
-
-  const itemList = billerItems?.itemList || [];
-  const [selectedItem, setSelectedItem] = useState(itemList?.[0] || {});
-  const [amount, setAmount] = useState(selectedItem?.amount || "");
+  const itemList = billerItems?.itemList || []; // Use the item list from parent
+  const [selectedItem, setSelectedItem] = useState(itemList?.[0] || {}); // Initialize with the first item or an empty object
+  const [amount, setAmount] = useState(selectedItem?.amount || ""); // Initialize amount based on selectedItem
   const [validationError, setValidationError] = useState(""); // To track validation errors
 
-  const { data: billerItemDetails } = useQuery({
-    queryKey: ["billerItemDetails", selectedItem?.id],
-    queryFn: () =>
-      getBillerItemDetails({
-        itemId: selectedItem?.id,
-        token,
-      }),
-    enabled: !!token && !!selectedItem?.id,
-  });
-
-  // Merge selectedItem with fetched details and send to parent
+  // Sync selectedItem with parent
   useEffect(() => {
-    const fullItemDetails = {
-      ...selectedItem,
-      ...(billerItemDetails?.data || {}), // Merge with API details
-    };
-    onSelectionChange(fullItemDetails); // Notify parent of the merged details
-  }, [selectedItem, billerItemDetails, onSelectionChange]);
+    onSelectionChange(selectedItem); // Notify parent of the updated item
+  }, [selectedItem, onSelectionChange]);
 
-  // Notify parent about the updated amount
+  // Sync the amount with parent
   useEffect(() => {
     onAmountChange(amount);
   }, [amount, onAmountChange]);
 
-  // Automatically set customerId to phoneNumber for Airtime/Data categories
+  // Automatically sync customerId with phoneNumber for Airtime/Data
   useEffect(() => {
     if (category === "Airtime" || category === "Data") {
       setCustomerId(phoneNumber); // Sync customerId with phoneNumber
@@ -57,15 +38,24 @@ const Selection = ({
     const newItem = itemList.find(
       (item) => item.paymentitemname === selectedOption
     );
-    setSelectedItem(newItem || {});
-    setAmount(newItem?.amount || ""); // Reset amount when selection changes
-    setValidationError(""); // Clear validation errors
+    if (newItem) {
+      setSelectedItem(newItem); // Update selectedItem
+      setAmount(newItem.amount || ""); // Update amount based on the selected item
+      setValidationError(""); // Clear any validation errors
+    } else {
+      console.error("Item not found for the selected option:", selectedOption);
+    }
   };
 
-  // Handle manual amount input
+  // Handle amount input
   const handleAmountChange = (value) => {
-    setAmount(value);
-    setValidationError(""); // Clear validation errors
+    // Ensure the value is a valid number or empty
+    if (/^\d*\.?\d*$/.test(value)) {
+      setAmount(value);
+      setValidationError(""); // Clear any validation errors
+    } else {
+      setValidationError("Invalid amount entered.");
+    }
   };
 
   return (
@@ -93,7 +83,7 @@ const Selection = ({
             value={customerId}
             onChange={(value) => {
               setCustomerId(value);
-              setValidationError(""); // Clear validation errors
+              setValidationError(""); // Clear any validation errors
             }}
           />
         )}
@@ -104,7 +94,7 @@ const Selection = ({
         value={phoneNumber}
         onChange={(value) => {
           setPhoneNumber(value);
-          setValidationError(""); // Clear validation errors
+          setValidationError(""); // Clear any validation errors
         }}
       />
       <Options
@@ -112,7 +102,7 @@ const Selection = ({
         icon={<i className="fa-solid fa-wallet"></i>}
         heading="Amount"
         value={amount}
-        editable={selectedItem?.amount === 0}
+        editable={selectedItem?.amount == 0} // Allow editing only if the item has no preset amount
         onChange={handleAmountChange}
       />
     </div>
