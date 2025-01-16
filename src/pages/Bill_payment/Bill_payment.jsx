@@ -6,7 +6,7 @@ const Bill_payment = () => {
   return (
     <BalanceWrapper>
       {({ balanceDisplayData }) => (
-        <div className="p-4 text-4xl">
+        <div className= "p-0 md:p-4 text-4xl">
           <Balance balanceData={balanceDisplayData} />
           <Menuitems  />
         </div>

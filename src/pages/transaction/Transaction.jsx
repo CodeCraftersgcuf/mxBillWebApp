@@ -64,7 +64,7 @@ const Transaction = () => {
   return (
     <BalanceWrapper>
       {({ balanceDisplayData }) => (
-        <div className="p-4 relative min-h-[90vh]">
+        <div className="px-0 md:p-4 relative min-h-[90vh]">
           {/* Receipt Model */}
           <ReceiptModel
             show={showReceipt}
@@ -91,7 +91,7 @@ const Transaction = () => {
           <Balance balanceData={balanceDisplayData} />
 
           {/* Transactions or No History Message */}
-          <div className="my-10 md:my-4">
+          <div className="my-10 md:my-4 px-4">
             {isLoadingHistory ? (
               <p className="text-center text-gray-500">
                 Loading transaction history...

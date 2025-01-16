@@ -39,7 +39,7 @@ const FundWallet = () => {
       />
 
       {/* Instructions */}
-      <div className="my-4 ms-4 flex flex-col gap-4 mb-12">
+      <div className="text-start md:text-center my-4 ms-4 flex flex-col gap-4 mb-12">
         <h1 className="text-xl font-bold">
           How To Fund Your Wallet 
         </h1>
