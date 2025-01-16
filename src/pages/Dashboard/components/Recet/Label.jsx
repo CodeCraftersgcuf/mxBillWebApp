@@ -10,8 +10,8 @@ const Label = ({
   return (
     <div className="flex items-center border-2 border-black rounded-lg p-2 sm:p-3 gap-2 sm:gap-4 shadow-md bg-white">
       {/* Icon Container */}
-      <div className="bg-[#130534] text-white w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full">
-        <img src={logo} alt="logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+      <div className="bg-[#130534] text-white w-10 sm:w-12 aspect-square flex items-center justify-center rounded-full">
+      <img src={logo} alt="logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
       </div>
 
       {/* Content */}
