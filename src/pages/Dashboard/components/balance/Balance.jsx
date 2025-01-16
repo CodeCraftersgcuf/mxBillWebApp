@@ -16,8 +16,13 @@ const Balance = ({ balanceData = [] }) => {
       </div>
 
       {/* Specific layout for screens between 320px and 425px */}
-      <div className="sm:hidden">
-        <div className="bg-theme-primary text-white rounded-lg shadow-lg shadow-gray-600 px-2 md:px-8 py-16 flex flex-col gap-2">
+      <div
+        className="sm:hidden"
+        style={{
+          marginBottom: "-10px",
+        }}
+      >
+        <div className="bg-theme-primary text-white rounded-lg shadow-lg shadow-gray-600 py-8 px-2 md:px-8 md:py-16 flex flex-col gap-2">
           <div>
             <SubBalance
               amount={balanceData[1].amount}

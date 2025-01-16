@@ -91,7 +91,7 @@ const Transaction = () => {
           <Balance balanceData={balanceDisplayData} />
 
           {/* Transactions or No History Message */}
-          <div className="my-6">
+          <div className="my-10 md:my-4">
             {isLoadingHistory ? (
               <p className="text-center text-gray-500">
                 Loading transaction history...
