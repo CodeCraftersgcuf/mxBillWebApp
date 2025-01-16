@@ -24,7 +24,8 @@ const Betting = () => {
   console.log('billerProviders', billerProviders);
 
   const providers = billerProviders?.data || [];
-  const Title = billerProviders?.data?.[0]?.providerTitle || 'Loading...';
+  console.log("Providers: ", providers);
+  const Title = billerProviders?.data?.[0]?.category || 'Loading...';
 
   return (
     <div className="p-4 ">

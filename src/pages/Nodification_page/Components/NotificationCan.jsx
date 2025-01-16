@@ -17,7 +17,7 @@ const NotificationCan = ({
             <img src={profile} alt="" className="w-8" />
           </div>
           <div>
-            <h1 className="text-xl font-bold">{title}</h1>
+            <h1 className="text-[1rem] md:text-xl  font-bold">{title}</h1>
             <p className="text-sm">
               {date} | {time}
             </p>

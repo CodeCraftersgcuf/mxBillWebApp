@@ -28,7 +28,7 @@ const Options = ({
       {/* Render dropdown or input inside the same box */}
       {type === "dropdown" ? (
         <select
-          className="flex-1 p-2 border rounded-lg bg-gray-200 text-black md:text-lg text-sm"
+          className="w-full max-w-full overflow-x-auto p-2 border rounded-lg bg-gray-200 text-black md:text-lg text-sm"
           value={value || ""}
           onChange={(e) => onChange(e.target.value)}
         >

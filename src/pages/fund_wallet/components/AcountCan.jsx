@@ -16,8 +16,8 @@ const AcountCan = ({ accountNumber = 'N/A', bankName = 'N/A', accountName = 'N/A
     return (
         <div className='bg-theme-primary text-white p-4 rounded-lg shadow-md shadow-gray-500 my-8 min-w-full md:min-w-[60%]'>
             <div className='flex items-center justify-between mb-4'>
-                <h1 className='text-2xl font-bold capitalize'>Account No.</h1>
-                <div className='flex items-center gap-4 text-2xl'>
+                <h1 className='text-sm md:text-2xl font-bold capitalize'>Account No.</h1>
+                <div className='flex items-center gap-4 text-sm md:text-2xl'>
                     <h1 className='account-number'>{accountNumber}</h1>
                     <button
                         className='py-1 rounded-lg copy-btn'
@@ -28,15 +28,15 @@ const AcountCan = ({ accountNumber = 'N/A', bankName = 'N/A', accountName = 'N/A
                 </div>
             </div>
             <div className='flex items-center justify-between'>
-                <h1 className='md:text-lg font-semibold'>Bank Name</h1>
-                <div className='flex items-center gap-4 md:text-lg'>
-                    <h1 className='account-number'>{bankName}</h1>
+                <h1 className='text-sm md:text-lg text-slate-500'>Bank Name</h1>
+                <div className='flex items-center gap-4 text-sm  md:text-lg'>
+                    <h1 className='account-number  text-sm  md:text-lg'>{bankName}</h1>
                 </div>
             </div>
             <div className='flex items-center justify-between'>
-                <h1 className='md:text-lg font-semibold'>Account Name</h1>
-                <div className='flex items-center gap-4 md:text-lg'>
-                    <h1 className='account-number'>{accountName}</h1>
+                <h1 className='text-sm md:text-lg text-slate-500'>Account Name</h1>
+                <div className='flex items-center gap-4 text-sm md:text-lg'>
+                    <h1 className='account-number  text-sm  md:text-lg'>{accountName}</h1>
                 </div>
             </div>
 

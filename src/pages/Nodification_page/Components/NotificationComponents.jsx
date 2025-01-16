@@ -68,9 +68,9 @@ const NotificationComponents = () => {
   return (
     <div className="py-4 my-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold">Recent Notifications</h1>
+        <h1 className="text-[1rem] md:text-xl font-bold">Recent Notifications</h1>
         <button
-          className="text-xl"
+          className="text-[1rem] md:text-xl "
           onClick={handleMarkAllRead}
           disabled={isMarkingAllRead}
         >
