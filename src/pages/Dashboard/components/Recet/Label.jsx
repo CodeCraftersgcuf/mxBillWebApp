@@ -5,24 +5,21 @@ const Label = ({
   subheading = "N/A",
   amount = "N/A",
   date = "N/A",
+  logo = "as",
 }) => {
   return (
     <div className="flex items-center border-2 border-black rounded-lg p-2 sm:p-3 gap-2 sm:gap-4 shadow-md bg-white">
       {/* Icon Container */}
-      <div className="bg-[#2E1033] text-white w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full">
-        <i className="bx bx-phone text-base sm:text-lg"></i>
+      <div className="bg-[#130534] text-white w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full">
+        <img src={logo} alt="logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
       </div>
 
       {/* Content */}
       <div className="flex flex-col w-full gap-1">
         {/* Heading and Amount */}
         <div className="flex items-center justify-between">
-          <h1 className="font-bold text-sm sm:text-base capitalize">
-            {heading}
-          </h1>
-          <h1 className="font-bold text-sm sm:text-base text-black">
-            ₦{amount}
-          </h1>
+          <h1 className="font-bold text-sm sm:text-base capitalize">{heading}</h1>
+          <h1 className="font-bold text-sm sm:text-base text-black">₦{amount}</h1>
         </div>
 
         {/* Subheading and Date */}

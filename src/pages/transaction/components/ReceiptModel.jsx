@@ -72,7 +72,7 @@ const ReceiptModel = ({
         {/* Go Back Button */}
         <button
           onClick={onClose}
-          className="bg-[#2E1033] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-[#3A2044] transition w-full"
+          className="bg-[#130534] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-[#2e1862] transition w-full"
         >
           Go Back
         </button>

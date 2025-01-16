@@ -17,6 +17,7 @@ const Recet = () => {
     queryFn: () => getTrsansactionDetails({ id: selectedTransactionId, token }),
     enabled: !!token && !!selectedTransactionId,
   });
+  // console.log("transactionDetails", transactionDetails);
 
   const handleTransactionClick = (transaction) => {
     setSelectedTransactionId(transaction.transaction_id);
@@ -28,6 +29,7 @@ const Recet = () => {
     queryFn: () => getTransferHistory(token),
     enabled: !!token,
   });
+  console.log("transferHistory", transferHistory);
 
   return (
     <div className="p-3 sm:p-4 bg-gray-100 rounded-lg shadow-md">
@@ -64,6 +66,7 @@ const Recet = () => {
                 date={
                   new Date(transaction.date).toLocaleDateString() || "N/A"
                 }
+                logo={transaction.logo}
               />
             </div>
           ))

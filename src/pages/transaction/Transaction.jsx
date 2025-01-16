@@ -60,7 +60,7 @@ const Transaction = () => {
       setCurrentPage(currentPage - 1);
     }
   };
-
+  console.log("transferHistory", transferHistory);
   return (
     <BalanceWrapper>
       {({ balanceDisplayData }) => (
@@ -115,6 +115,7 @@ const Transaction = () => {
                       date={
                         new Date(transaction.date).toLocaleDateString() || "N/A"
                       }
+                      logo={transaction.logo || "N/A"}
                     />
                   </div>
                 ))}
