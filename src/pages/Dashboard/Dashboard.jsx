@@ -10,7 +10,7 @@ const Dashboard = () => {
 
       {({ balanceDisplayData }) => (
         
-        <section className="p-4">
+        <section className="px-0 md:p-4">
           <div className="">
             <Balance balanceData={balanceDisplayData} />
             <Menuitems />

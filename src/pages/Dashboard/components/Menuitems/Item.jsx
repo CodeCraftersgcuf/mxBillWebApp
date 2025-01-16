@@ -12,7 +12,7 @@ const Item = ({
 }) => {
   return (
     <Link to={link}>
-      <div className="mt-6 flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-col items-center justify-center gap-2">
         <div
           className={`w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28 flex items-center justify-center rounded-full bg-[#130534]`}
         >

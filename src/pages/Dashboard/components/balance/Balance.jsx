@@ -4,7 +4,8 @@ const Balance = ({ balanceData = [] }) => {
   return (
     <>
       {/* Default layout for screens outside 320px to 425px */}
-      <div className="hidden sm:flex bg-theme-primary text-white rounded-lg shadow-lg shadow-gray-600 px-2 md:px-8 py-16 flex-row items-center justify-between gap-2">
+      <div className="hidden sm:flex bg-theme-primary text-white rounded-none md:rounded-lg shadow-lg shadow-gray-600 px-2 md:px-8 py-16 flex-row items-center justify-between gap-2">
+
         {balanceData.map((bal, index) => (
           <SubBalance
             key={index}
@@ -22,7 +23,7 @@ const Balance = ({ balanceData = [] }) => {
           marginBottom: "-10px",
         }}
       >
-        <div className="bg-theme-primary text-white rounded-lg shadow-lg shadow-gray-600 py-8 px-2 md:px-8 md:py-16 flex flex-col gap-2">
+        <div className="bg-theme-primary text-white rounded-none md:rounded-lg shadow-lg shadow-gray-600 py-8 px-9 md:px-8 md:py-16 flex flex-col gap-2">
           <div>
             <SubBalance
               amount={balanceData[1].amount}
