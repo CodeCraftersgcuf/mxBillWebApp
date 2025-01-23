@@ -76,7 +76,7 @@ const HelpCenter = () => {
 
   return (
     <div className="p-4 bg-gray-100">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full relative">
+      <div className="bg-white rounded-lg shadow-lg md:p-8 w-full relative">
         <div className="flex border-b">
           <button
             className={`w-1/2 text-center py-2 font-semibold ${
