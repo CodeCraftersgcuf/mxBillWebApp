@@ -163,8 +163,6 @@ const EnterInfo = () => {
       style={{
         minHeight: "calc(100vh - 64px)",
         maxWidth: "100%", // This will be applied for small screens between 325px and 420px
-  
-
       }}
     >
       {loaderLoading && <Loader />}
@@ -195,6 +193,7 @@ const EnterInfo = () => {
             onClose={() => setPaymentModel(false)}
             category_id={selectedItem?.category_id}
             divisionId={selectedItem?.divisionId}
+            phoneNumber={phoneNumber}
             paymentCode={selectedItem?.paymentCode}
             paymentitemname={selectedItem?.paymentitemname}
             // phoneNumber={}

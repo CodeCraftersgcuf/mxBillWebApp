@@ -28,10 +28,11 @@ const Selection = ({
 
   // Automatically sync customerId with phoneNumber for Airtime/Data
   useEffect(() => {
-    if (category === "Airtime" || category === "Data") {
-      setCustomerId(phoneNumber); // Sync customerId with phoneNumber
+    if ((category === "Airtime" || category === "Data") && phoneNumber) {
+      setCustomerId(phoneNumber);
     }
-  }, [phoneNumber, category, setCustomerId]);
+  }, [phoneNumber, category]);
+  
 
   // Handle dropdown selection
   const handleDropdownChange = (selectedOption) => {

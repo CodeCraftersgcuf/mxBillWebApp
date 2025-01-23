@@ -6,6 +6,8 @@ import Cookies from "js-cookie";
 import LowBalance from "./LowBalance";
 import ReceiptModel from "../../transaction/components/ReceiptModel";
 import Loader from "../../../components/Loader";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const MakePayment = ({
   show = false,
@@ -39,15 +41,16 @@ const MakePayment = ({
   const [receiptShow, setReceiptShow] = useState(false);
   const [transactionDetails, setTransactionDetails] = useState(null);
   const [fundwalet, setFundwalet] = useState(false);
-  const token = Cookies.get("authToken"); // Retrieve token from cookies
+  const token = Cookies.get("authToken");
   const [loaderLoading, setLoaderLoading] = useState(false);
+  const navigate = useNavigate(); // Get the navigate function
+
   const { mutate: payBill, isPending: isBillPaying } = useMutation({
     mutationFn: payBillFn,
     onMutate: () => {
       setLoaderLoading(true);
     },
     onSuccess: (data) => {
-      // alert('Transaction successful');
       setLoaderLoading(false);
       console.log("transaction_data", data);
       setTransactionDetails(data);
@@ -63,16 +66,9 @@ const MakePayment = ({
       // alert(error.message);
     },
   });
-  console.log("BilllerId", billerId);
-  console.log("BillerItemId", billerItemId);
-  console.log("CustomerID", customerId);
+
   console.log("PhoneNumber", phoneNumber);
-  console.log("BillName", BillName);
-  console.log("AccountName", AccountName);
-  console.log("Amount", Amount);
-  console.log("ChargeApplied", ChargeApplied);
-  console.log("Total", total);
-  console.log("Balance", Balance);
+
   const handlePaymentFunction = () => {
     const reqData = {
       amount: Amount,
@@ -81,9 +77,9 @@ const MakePayment = ({
       billerItemId: billerId,
       phoneNumber: phoneNumber,
       division: divisionId,
-      category_id:category_id,
-      productId:productId,
-      paymentCode:paymentCode,
+      category_id: category_id,
+      productId: productId,
+      paymentCode: paymentCode,
       paymentitemname: paymentitemname,
       userId,
     };
@@ -91,6 +87,9 @@ const MakePayment = ({
       data: reqData,
       token,
     });
+  };
+  const handleOnClose = () => {
+    navigate("/dashboard"); // Correct usage of navigate function
   };
 
   if (!show) return null;
@@ -115,7 +114,8 @@ const MakePayment = ({
       />
       <ReceiptModel
         show={receiptShow}
-        onClose={() => setReceiptShow(false)}
+        comingFromBill={true}
+        onClose={handleOnClose}
         amountPaid={`₦${transactionDetails?.data?.amount || "loading..."}`}
         billerCategory={transactionDetails?.data?.category || "loading..."}
         billerProvider={transactionDetails?.data?.provider || "loading..."}
@@ -129,37 +129,50 @@ const MakePayment = ({
         status={transactionDetails?.data?.status || "loading..."}
         token={transactionDetails?.data?.token || "N/A"}
       />
-      <div className="main bg-white w-full md:w-[60%] p-4 rounded-t-lg flex flex-col gap-4">
-        <div className="flex items-center justify-between text-2xl">
+      <div className="main bg-white w-full md:w-[80%] lg:w-[60%] p-4 rounded-t-lg flex flex-col gap-4 sm:gap-6">
+        {/* Bill Name */}
+        <div className="flex flex-row items-center justify-between text-base sm:text-lg">
           <h1 className="font-bold">Bill Name</h1>
-          <h1>{BillName}</h1>
+          <h1 className="text-gray-700">{BillName}</h1>
         </div>
-        <div className="flex items-center justify-between text-2xl">
+
+        {/* Account Name */}
+        <div className="flex flex-row items-center justify-between text-base sm:text-lg">
           <h1 className="font-bold">Account Name</h1>
-          <h1>{AccountName}</h1>
+          <h1 className="text-gray-700">{AccountName}</h1>
         </div>
-        <div className="flex items-center justify-between text-2xl">
+
+        {/* Amount */}
+        <div className="flex flex-row items-center justify-between text-base sm:text-lg">
           <h1 className="font-bold">Amount</h1>
-          <h1>{Amount}</h1>
+          <h1 className="text-gray-700">{Amount}</h1>
         </div>
-        <div className="flex items-center justify-between text-2xl">
+
+        {/* Charges Applied */}
+        <div className="flex flex-row items-center justify-between text-base sm:text-lg">
           <h1 className="font-bold">Charges Applied</h1>
-          <h1>{ChargeApplied}</h1>
+          <h1 className="text-gray-700">{ChargeApplied}</h1>
         </div>
-        <div className="flex items-center justify-between text-2xl">
+
+        {/* Total Payment */}
+        <div className="flex flex-row items-center justify-between text-base sm:text-lg">
           <h1 className="font-bold">Total Payment</h1>
-          <h1>{total}</h1>
+          <h1 className="text-gray-700">{total}</h1>
         </div>
-        <div className="bg-theme-primary text-white p-2 flex items-center justify-between text-2xl rounded-lg">
+
+        {/* Balance Section */}
+        <div className="bg-theme-primary text-white p-3 sm:p-4 flex flex-row items-center justify-between text-base sm:text-lg rounded-lg">
           <h1 className="font-bold flex items-center gap-2">
             <i className="fa-solid fa-wallet"></i>
             Balance
           </h1>
           <h1>{Balance}</h1>
         </div>
+
+        {/* Payment Button */}
         <div>
           <button
-            className="bg-theme-primary text-white p-2 py-4 font-bold text-2xl rounded-lg hover:bg-theme-secondary transition duration-300 w-full"
+            className="bg-theme-primary text-white p-3 sm:p-4 font-bold text-base sm:text-lg rounded-lg hover:bg-theme-secondary transition duration-300 w-full"
             onClick={handlePaymentFunction}
           >
             Make Payment

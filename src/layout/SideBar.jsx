@@ -31,11 +31,7 @@ const Sidebar = ({ setMobileOpen }) => {
             "link": '/fund/wallet',
             "icon": 'bx-wallet'
         },
-        {
-            "name": 'Virtual Card',
-            "link": '/virtual/card',
-            "icon": 'bxs-credit-card-front'
-        },
+       
         {
             "name": 'Edit Profile',
             "link": '/profile',

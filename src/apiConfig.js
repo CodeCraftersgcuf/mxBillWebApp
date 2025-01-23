@@ -1,4 +1,4 @@
-const API_DOMAIN = 'https://mxbillpay.hmstech.org/api';
+const API_DOMAIN = 'https://admin.mxbillpay.com/api';
 
 const API_ENDPOINTS = {
   AUTH: {

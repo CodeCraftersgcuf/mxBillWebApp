@@ -20,6 +20,9 @@ const Recet = () => {
   // console.log("transactionDetails", transactionDetails);
 
   const handleTransactionClick = (transaction) => {
+    if(transaction.category=="Fund" || transaction.category=="fund"){
+      return;
+    }
     setSelectedTransactionId(transaction.transaction_id);
     setShowReceipt(true);
   };

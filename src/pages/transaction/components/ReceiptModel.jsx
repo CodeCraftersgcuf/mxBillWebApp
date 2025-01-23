@@ -2,6 +2,7 @@ import React from "react";
 
 const ReceiptModel = ({
   show = false,
+  comingFromBill = false,
   onClose = () => {},
   amountPaid = "N/A",
   billerCategory = "N/A",
@@ -23,37 +24,63 @@ const ReceiptModel = ({
         {/* Receipt Details */}
         <div className="flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md">
           <div className="flex justify-between items-center border-b pb-2">
-            <span className="font-bold text-black text-[13px] md:text-[16px]">Amount Paid (NGN)</span>
-            <span className="text-xl font-bold text-black text-[13px] md:text-[16px]">{amountPaid}</span>
+            <span className="font-bold text-black text-[13px] md:text-[16px]">
+              Amount Paid (NGN)
+            </span>
+            <span className="text-xl font-bold text-black text-[13px] md:text-[16px]">
+              {amountPaid}
+            </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="font-semibold text-black text-[13px] md:text-[16px]">Biller Category</span>
-            <span className="text-black text-[13px] md:text-[16px]" >{billerCategory}</span>
+            <span className="font-semibold text-black text-[13px] md:text-[16px]">
+              Biller Category
+            </span>
+            <span className="text-black text-[13px] md:text-[16px]">
+              {billerCategory}
+            </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="font-semibold text-black text-[13px] md:text-[16px]">Biller Provider</span>
-            <span className="text-black text-[13px] md:text-[16px]" >{billerProvider}</span>
+            <span className="font-semibold text-black text-[13px] md:text-[16px]">
+              Biller Provider
+            </span>
+            <span className="text-black text-[13px] md:text-[16px]">
+              {billerProvider}
+            </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="font-semibold text-black text-[13px] md:text-[16px]">Biller Item</span>
-            <span className="font-bold text-black text-[13px] md:text-[16px]">{billerItem}</span>
+            <span className="font-semibold text-black text-[13px] md:text-[16px]">
+              Biller Item
+            </span>
+            <span className="font-bold text-black text-[13px] md:text-[16px]">
+              {billerItem}
+            </span>
           </div>
         </div>
 
         <div className="flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md">
           <div className="flex justify-between items-center border-b pb-2">
-            <span className="font-semibold text-black text-[13px] md:text-[16px]">Transaction Date</span>
-            <span className="text-black text-[13px] md:text-[16px]" >{transactionDate}</span>
+            <span className="font-semibold text-black text-[13px] md:text-[16px]">
+              Transaction Date
+            </span>
+            <span className="text-black text-[13px] md:text-[16px]">
+              {transactionDate}
+            </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="font-semibold text-black text-[13px] md:text-[16px]">Transaction ID</span>
-            <span className="text-black text-[13px] md:text-[16px]" >{transactionId}</span>
+            <span className="font-semibold text-black text-[13px] md:text-[16px]">
+              Transaction ID
+            </span>
+            <span className="text-black text-[13px] md:text-[16px]">
+              {transactionId}
+            </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="font-semibold text-black text-[13px] md:text-[16px]">Status</span>
+            <span className="font-semibold text-black text-[13px] md:text-[16px]">
+              Status
+            </span>
             <span
               className={`text-white text-sm px-3 py-1 rounded ${
-                status === "completed"
+                status === "completed" || status === "success"
                   ? "bg-green-500"
                   : "bg-red-500"
               }`}
@@ -63,8 +90,12 @@ const ReceiptModel = ({
           </div>
           {token !== "N/A" && (
             <div className="flex justify-between items-center">
-              <span className="font-semibold text-black text-[13px] md:text-[16px]">Token</span>
-              <span className="text-black text-[13px] md:text-[16px]" >{token}</span>
+              <span className="font-semibold text-black text-[13px] md:text-[16px]">
+                Token
+              </span>
+              <span className="text-black text-[13px] md:text-[16px]">
+                {token}
+              </span>
             </div>
           )}
         </div>
@@ -74,7 +105,10 @@ const ReceiptModel = ({
           onClick={onClose}
           className="bg-[#130534] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-[#2e1862] transition w-full"
         >
-          Go Back
+          {
+            comingFromBill ?"Done":"Go Back"
+          }
+          {/* Go Back */}
         </button>
       </div>
     </div>

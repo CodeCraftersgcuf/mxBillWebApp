@@ -16,6 +16,8 @@ const initialState = {
   totalIncome: null,
   totalBillPayment: null,
   phoneNumber: null,
+  dob: null,
+  occupation: null,
 };
 
 export const authReducer = (state, action) => {
@@ -46,6 +48,8 @@ export const AuthProvider = ({ children }) => {
       totalIncome,
       totalBillPayment,
       phoneNumber,
+      dob,
+      occupation,
     } = data;
 
     const currentToken = token || state.token; // Preserve the current token if not provided
@@ -95,6 +99,8 @@ export const AuthProvider = ({ children }) => {
       sameSite: "strict",
     });
 
+    Cookies.set("dob", dob || Cookies.get("dob"), { secure: true, sameSite: "strict" });
+    Cookies.set("occupation", occupation || Cookies.get("occupation"), { secure: true, sameSite: "strict" });
     dispatch({
       type: "LOGIN",
       payload: {
@@ -109,6 +115,8 @@ export const AuthProvider = ({ children }) => {
         totalIncome,
         totalBillPayment,
         phoneNumber,
+        dob,
+        occupation
       },
     });
   };

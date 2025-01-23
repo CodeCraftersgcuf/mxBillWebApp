@@ -24,6 +24,7 @@ const MenuItems = ({ textSize, icon, circleSize, perColumn = "8" }) => {
   }
 
   const handleCategoryClick = (category) => {
+    Cookies.set("categoryIcon", category.icon);
     if (category.isCategory === 1) {
       navigate(`/${category.id}`, { state: { icon: category.icon } });
     }
