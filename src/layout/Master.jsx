@@ -51,7 +51,7 @@ const Layout = () => {
             <i className="bx bx-menu text-4xl"></i>
           </button>
           <div className="flex items-center gap-6">
-            <Link to={'/help-center'}><img src={support} alt="Support" width={30} /></Link>
+            {/* <Link to={'/help-center'}><img src={support} alt="Support" width={30} /></Link> */}
             <Link to={'notifications/settings'}><i className="bx bxs-bell-ring text-3xl"></i></Link>
             <Link to={'/profile'}>
               <img

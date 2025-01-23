@@ -3,7 +3,7 @@ import Balance from "./components/balance/Balance";
 import Menuitems from "./components/Menuitems/Menuitems";
 import Recet from "./components/Recet/Recet";
 import BalanceWrapper from "../../components/BalanceWrapper";
-
+import SliderImages from "./components/SliderImages";
 const Dashboard = () => {
   return (
     <BalanceWrapper>
@@ -15,6 +15,8 @@ const Dashboard = () => {
             <Balance balanceData={balanceDisplayData} />
             <Menuitems />
             <Recet />
+          
+            <SliderImages />
           </div>
         </section>
       )}

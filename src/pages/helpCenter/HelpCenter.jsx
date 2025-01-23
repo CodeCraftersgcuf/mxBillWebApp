@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChatCan from './components/ChatCan';
 import SenderInput from './components/SenderInput';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { API_DOMAIN } from '../../apiConfig';
+import FAQ from './components/FAQ';
 
 const HelpCenter = () => {
+  const [activeTab, setActiveTab] = useState('faq');
   const token = Cookies.get('authToken');
 
   // Fetch messages function
@@ -75,18 +77,37 @@ const HelpCenter = () => {
   return (
     <div className="p-4 bg-gray-100">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full relative">
-        <h1 className="text-center text-white font-bold bg-theme-primary p-4 rounded w-fit mx-auto">
-          Customer Service
-        </h1>
-        {isLoading ? (
-          <p>Loading chat...</p>
-        ) : (
-          <>
-            {/* Reverse messages array to display newest at the bottom */}
-            <ChatCan messages={[...messages].reverse()} />
-            <SenderInput onSendMessage={handleSendMessage} />
-          </>
-        )}
+        <div className="flex border-b">
+          <button
+            className={`w-1/2 text-center py-2 font-semibold ${
+              activeTab === 'faq' ? 'border-b-2 border-black text-black' : 'text-gray-400'
+            }`}
+            onClick={() => setActiveTab('faq')}
+          >
+            FAQ
+          </button>
+          <button
+            className={`w-1/2 text-center py-2 font-semibold ${
+              activeTab === 'contact' ? 'border-b-2 border-black text-black' : 'text-gray-400'
+            }`}
+            onClick={() => setActiveTab('contact')}
+          >
+            Contact Us
+          </button>
+        </div>
+
+        <div className="mt-4">
+          {activeTab === 'faq' ? (
+            <FAQ />
+          ) : isLoading ? (
+            <p>Loading chat...</p>
+          ) : (
+            <>
+              <ChatCan messages={[...messages].reverse()} />
+              <SenderInput onSendMessage={handleSendMessage} />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

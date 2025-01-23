@@ -101,7 +101,7 @@ const Form = ({
         label="Occupation"
         type="text"
         placeholder="Occupation"
-        value={formData.occupation || ""}
+        value={formData.occupation !== "undefined" ? formData.occupation : "Occupation"}
         name="occupation"
         onChange={handleInputChange}
         icon="bx bxs-pencil"

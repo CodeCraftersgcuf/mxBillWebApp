@@ -124,7 +124,7 @@ const Transaction = () => {
                     className={`px-4 py-2 rounded ${
                       currentPage === 1
                         ? "bg-gray-300"
-                        : "bg-blue-500 text-white hover:bg-blue-600"
+                        : "bg-[#130534] text-white "
                     }`}
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
@@ -138,7 +138,7 @@ const Transaction = () => {
                     className={`px-4 py-2 rounded ${
                       currentPage === totalPages
                         ? "bg-gray-300"
-                        : "bg-blue-500 text-white hover:bg-blue-600"
+                        : "bg-[#130534] text-white "
                     }`}
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
